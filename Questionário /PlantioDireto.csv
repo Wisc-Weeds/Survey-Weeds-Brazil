@@ -1,0 +1,19 @@
+Pdireto,Regiao,Perc
+Sim,Norte,55
+Parcialmente,Norte,27
+Nao ,Norte,18
+Sim,Nordeste,50
+Parcialmente,Nordeste,18
+Nao ,Nordeste,32
+Sim,Centro,72
+Parcialmente,Centro,17
+Nao ,Centro,11
+Sim,Sudeste,51
+Parcialmente,Sudeste,18
+Nao ,Sudeste,31
+Sim,Sul,67
+Parcialmente,Sul,27
+Nao ,Sul,6
+Sim,Brasil,61
+Parcialmente,Brasil,22
+Nao ,Brasil,17

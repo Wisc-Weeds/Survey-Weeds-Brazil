@@ -1,0 +1,395 @@
+---
+title: Assessment of Weed Management Strategies Prior to Introduction of Auxin-Tolerant Crops in Brazil
+author:
+- affilnum: 1
+  email: max.oliveira@wisc.edu
+  name: Maxwel Coura Oliveira
+- affilnum: 2
+  name: Anelise Lencina da Silva
+- affilnum: 3
+  name: André da Rosa Ulguim
+- affilnum: 4
+  name: Rodrigo Werle
+bibliography:
+- brsurvey.bib
+- mybibfile.bib
+- Survey_Brazil.bib
+output:
+  pdf_document:
+    fig_caption: yes
+    fig_height: 7
+    fig_width: 7
+    includes:
+      in_header: header.tex
+    keep_tex: yes
+    number_sections: no
+    template: 
+  html_document: null
+  word_document: null
+classoption: a4paper
+csl: weed-technology.csl
+documentclass: article
+fontsize: 12pt
+geometry: margin=1in
+linenumbers: yes
+capsize: normalsize
+spacing: doublespacing
+affiliation:
+- affil: Postdoctoral Research Associate, Department of Agronomy, University of Wisconsin-Madison,
+    Madison, WI, USA.
+  affilnum: 1
+- affil: Graduate Research Assistant, Department of Crop Protection, Universidade
+    Federal de Santa Maria, Santa Maria, RS, Brazil.
+  affilnum: 2
+- affil: Associate Professor, Department of Crop Protection, Universidade Federal
+    de Santa Maria, Santa Maria, RS, Brazil.
+  affilnum: 3
+- affil: Assistant Professor, Department of Agronomy, University of Wisconsin-Madison,
+    Madison, WI, USA.
+  affilnum: 4
+---
+
+
+**Short title**: Survey of Weed Management in Brazil
+
+\singlespace
+
+\vspace{2mm}\hrule
+
+**Abstract**: A stakeholder survey was conducted to document current agricultural practices and perceptions of crop and weed management challenges across Brazil. The dominant crops managed by survey respondents are soybean (73%) and corn (66%). Approximately 75% of survey respondents grow or manage annual cropping systems with two to three crops cultivated per year in succession. Eighteen percent of respondents manage only irrigated cropping-systems, and over 60% of respondents use no-till as a standard practice. According to respondents, the top five troublesome weed species in Brazilian cropping systems are *Conyza*  spp., *Digitaria insularis*, *Ipomoea* spp., *Eleusine indica*, and *Commelina*  spp. Amongst the eight species documented to have evolved resistance to EPSPS-inhibitor (glyphosate) in Brazil, *Conyza*  spp. and *D. insularis*  were reported as the most concerning weeds. Other than glyphosate, 31 and 78% of respondents manage ACCase and/or ALS-inhibitors resistant weeds, respectively. Besides herbicides, 45% of respondents use mechanical, and 75% use cultural weed control strategies. Sixty-one percent of survey respondents adopt cover crops to some extent to suppress weeds and improve soil chemical and physical properties. Nearly 60% of survey respondents intend to adopt the dicamba or 2,4-D resistant crops when available in the country. According to 54% of survey respondents, industry representatives are the main source for crop and weed management information and recommendations. Herein we present an overview of crop and weed management practices adopted and challenges faced in Brazilian agriculture. Results may help practitioners, academics, industry and policy makers better understand the bad and the good of current cropping systems and weed management practices adopted in Brazil, and adjust research, education, technologies priorities and needs moving forward.
+
+
+\vspace{3mm}\hrule
+
+**Keywords**: Cover crops; Dicamba; Herbicide weed resistance; No-till; Soybean; Survey.
+
+**Nomemclature**: 2,4-D, 2,4-dichlorophenoxyacetic acid; 5-enolpyruvylshikimate-3-phosphate synthase (EPSPS) inhibitor; Acetolactate synthase (ALS)-inhibitorinhibitor; Acetyl CoA carboxylase (ACCase) Inhibitor; dicamba; marestail, *Conyza* spp., sourgrass, *Digitaria insularis*, morningglory, *Ipomoea* spp.; goosegrass, *Eleusine indica*, Asiatic dayflower, *Commelina* spp; common beans, *Phaseolus vulgaris*; corn, *Zea mays* L.; cotton, *Gossypium hirsutum*; soybean, *Glycine max* L. Merr.; wheat, *Triticum aestivum*.
+
+\doublespace
+
+\bleft
+\newpage
+
+Synthetic inputs are used to minimize the impact of pests on crop yield potential. 
+
+# Introduction
+
+Agriculture has undergone major evolution in the past century leading to a significant increase in crop yields [@warren_spectacular_1998]. From 1930s to 2020s, grain corn, cotton, rice and soybeans have experienced a crop yield increase of 740%, 390%, 350% and 290%, respectively [@warren_spectacular_1998; @usda-nass_national_2019-1]. The discovery of synthetic herbicides, including MCPA (2-methyl-4-chlorophenoxyacetic acid) and 2,4-D (2,4-dichlorophenoxyacetic acid) in the 1940s had a positive impact on crop yields by reducing weed infestations in cropping-systems [@troyer_beginning:_2001]. For example, 2,4-D was adopted as an effective (>90%) broadleaf weed control compound used at lower concentrations compared to organic herbicides, such as sodium chlorate and sodium thiocyanate [@marth_24-dichlorophenoxyacetic_1944]. The introduction of *S*-triazine (e.g., atrazine) represents another milestone in terms of weed control and herbicide popularity amongst growers [@mcfarland_triazine_2011]. The combination of preemergence (PRE) and postemergence (POST) herbicides plus cultural and mechanical methods reduced the need for labor-intensive hand weeding, increased efficacy and greatly reduced the costs for weed management [@j._t._holstun_weed_1960; @gianessi_value_2007]
+
+From the 1940s to the 1980s (herbicide discovery era), novel herbicide chemistries with broad weed control spectra, application window in relation to crop developmental stage, and selectivity were discovered. During that time, a herbicide sites of action (SOA) were introduced every three years on average [@appleby_history_2005]. Herbicides quickly became the synonymous of weed management and through this date represent the most commonly adopted tool for weed control in conventional production systems. Given the shortage of and challenges related to novel herbicide discovery [@duke_why_2012], industry focus has shifted towards biotechnology and the production of crop hybrids or varieties genetically engineered with herbicide-resistant (HR) genes [@owen_current_2000; @bonny_herbicide-tolerant_2011]. In 1996, glyphosate-resistant (GR) soybean (Roundup ready) was the first HR crop to be introduced, which allowed growers to spray glyphosate, a systemic, non-selective and very effective herbicide POST in GR-soybean crops [@padgette_development_1995]. The success of GR-soybean led to the introduction of other GR crops (e.g., cotton and corn). Glyphosate use has risen 15-fold worldwide since the introduction of GR crops in 1996 [@benbrook_trends_2016]. This increase was accelerated with introduction of GR crops to developing countries such as Brazil and Argentina in the early 2000s. In 2014, glyphosate represented 66% of herbicide applications in Brazil [@sidra-ibge_sistema_2020]. The GR crops were documented as the most adopted technology of modern agriculture [@green_rise_2018]. However, glyphosate overreliance resulted in weed shifts and evolution of GR-weeds [@owen_weed_2008]. Thus far, there are 48 GR-resistance weed species worldwide, being 9 GR-resistance weed species in Brazil, including *Digitaria insularis* and *Conyza* spp. [@heap_list_2020]. 
+
+
+Rapid evolution of GR-resistance weeds prompted the development of other HR crops such as glufosinate, 2,4-D or dicamba-resistant (DR) soybean, cotton and corn. The new synthetic auxin-resistance (AR) technology was introduced in 2017 to the United States and it will be soon available to Brazil. The 2,4-D technology is marketed as Enlist E3 (Corteva Agriscience, Wilmington, DE), which allows glyphosate, glufosinate, and a new 2,4-D-choline salt formulation application on Enlist crops [@wright_robust_2010]. Moreover, the Roundup Ready 2 Xtend (Bayer Crop Science, St. Louis, MO) allows the use of glyphosate and new dicamba formulations, including diglycolamine salt with VaporGrip, an acetic acid-acetate buffering system, or a dicamba salt N,N-Bis-(3-aminopropyl) methylamine) on DR-crops. These new 2,4-D and dicamba formulations are products with reduced volatility compared to their previous formulations. However, in the first year of DR crops in the United States, it was estimated near 1.4 million ha with dicamba injury on non-DR soybeans [@hager_observations_2018]. In Nebraska, 51% of survey respondents noted dicamba injury in their non-DR soybeans in 2017 [@werle_survey_2018]. It is still controversial whether the injury on sensitive vegetation is due to dicamba vapor, particle drift and/or tank contamination. Nonetheless, the upcoming introduction of AR-crops in Brazil raises concerns of off-target movement (OTM), and it requires further investigations.
+
+
+The introduction of synthetic auxin-resistant (AR) crops increases complexity but represents a new milestone in terms of weed management; thus documenting current practices prior their introduction and after nearly 20 years of GR soybean use in Brazil is necessary. Surveys are useful tools for documenting agricultural practitioners’ knowledge and perceptions regarding specific strategies. For example, a survey with pesticide applicators indicated the need for further education regarding application of synthetic auxin technologies in Missouri, USA [@bish_survey_2017]. Also, a survey showed that weed control is based on empiric short term decisions with > 53% using solely herbicides for weed management in Argentina [@scursoni_weed_2019]. A survey documented a concern on protoporphyrinogen oxidase (PPO)–resistant *Amaranthus palmeri* in Southwestern United States , and the need to diversify weed management focusing on cover crop research in that geography [@schwartz-lazaro_midsouthern_2018]. Documenting current weed management practices in different regions of Brazil could improve weed management decisions, policy, education, investments, research priorities, and further needs. 
+
+In Brazil, growers rely mainly on crop advisors for crop management decisions, including strategies for weed control (dos Reis MR, personal communication). The use of survey questionnaires in Brazil with agricultural practitioners has been lacking. Therefore, the objective of this survey was to understand from growers and crop advisors (e.g., crop consultants, coop, industry, and University representatives) current agricultural management practices, perceptions, and challenges regarding current cropping-systems and weed management in Brazil. The survey had a specific focus on troublesome and HR weeds, and evaluating interest, value and potential challenges the new auxin resistant technologies will face if deployed/adopted in Brazil.
+
+
+
+# Material and Methods
+ 
+A survey was developed to understand Brazilian stakeholders' perceptions and challenges about cropping-systems and weed management strategies (Supp. file). To reach a uniform representation, the survey was conducted online using Qualtrics linked to the University of Wisconsin-Madison and circulated via social media, including Twitter\textsuperscript \textregistered, Facebook\textsuperscript \textregistered, LinkedIn\textsuperscript \textregistered, and Whatsapp\textsuperscript \textregistered. The messenger Whatsapp\textsuperscript \textregistered is popular amongst agricultural stakeholders in Brazil. Moreover, Extension agents assisted with distributing the survey questionnaire to stakeholders.
+
+The survey comprised three sections. Questions in the first section focused on respondents’ demographics: a) region, b) managed area (ha) and c) role (e.g., grower or industry rep). The second section was designed to focus on cropping-systems practices: a) managed crops, b) crop succession, c) tillage, d) irrigation, e) cover crops and f) crop-livestock integration. The third section  focused on weed management strategies: a) herbicide program, b) troublesome weeds, c) herbicide resistant weeds, d) integrated weed management, e) adoption of AR crops and f) herbicide application decisions. The third section also incorporated general questions about cropping systems and weed management challenges. 
+
+The online survey was available from April 1 through June 30, 2018. Results were exported from Qualtrics as a Microsoft Excel (Microsoft Office, Redmond, WA) file with the answers to each question in separate columns. Survey data were sorted and analyzed using the *sort*, *filter*, and *count* functions in Microsoft Excel and *summarise*, *filter*, and *pipe* in the package tidyverse [@wickham_tidyverse:_2017] of R statistical software[@r_core_team_r:_2019]. For most questions, results are presented as: (1) percent of respondents, (2) percent of answers and (3) percent of number of hectares represented. Not every respondent answered every question; for some questions, respondents were allowed to select multiple choices. Moreover, survey respondents were grouped according to their region as listed in the demographic geopolitical Brazilian map: North, Northeast, Midwest, Southeast, and South (Figure 1). 
+
+
+# Results and Discussion
+
+## Demographics
+
+Survey answers were obtained from 343 stakeholders, representing 21 of 27 Brazilian states. Most survey respondents were located in the South (43%) and Southeast (38%) regions of Brazil (Table 1A); however 43% of managed ha represented in the survey are in the Midwest region (Table 1B). The South and Southeast regions are small/medium farm size (<500 ha), while the Midwest, North and Northeast regions represent the newly expanded agricultural region in Brazil, with farm size of > 500 ha up to 100000 ha [@dias_patterns_2016]. Most survey respondents identified themselves as agronomists (69%), followed by university and industry representatives (22%), growers (21%), and consultants (9%, Table 1C). Also, respondents represent a total of 5,7 million crop ha, a representative area as there are 78 million ha of Brazilian territory occupied with crops and planted forest [@ibge_serie_2019]. 
+
+
+## Crop Management
+
+The survey showed that only 16% of respondents manage crops in conventional tillage in Brazil, with highest no-till practice in the Midwest (71%)  (Table 2A). Six out 10 respondents adopt/recommend cover crops to some extent (Table 2B), with *Avena sativa* L. (48%), *Crotalaria juncea* L. (27%), *Pennisetum glaucum* (29%), *Urochloa* spp. (27%), *Lolium multiflorum* L. (22%), and *Brassica rapa* L. (16%) ranked as the top cover crop species adopted by respondents (Table 2C). Moreover, crop-livestock integration is adopted by 37% of respondents in Brazil (Table 2D). Survey results show that crop succession is a common practice in Brazil, 71% of respondents manage at least two crops in the same land within a year (Table 2E). In the South, nearly 40% of respondents grow three crops in the same land within a year but 20% in the Midwest, which strongly rely on two crop succession systems (74%). Soybean is usually planted as the first crop, followed by corn or cotton, and pulse, winter or cover crops [@cerdeira_agricultural_2011]. The number of crops per year is likely a result of moisture availability due to regular rainfall in the Southern than Northern Brazilian states [@alvares_koppens_2013]. Moreover, 50% and 32% of survey respondents managed rainfed, and partially irrigated fields, respectively (Table 2F). Therefore, predominant practices in Brazil include the adoption of no-till, crop succession, and cover crops.
+
+No-till strongly contributed for the expansion of annual crops in Brazil, especially in the *Cerrado* (savanna biome) area in the 1980s onwards [@sanders_agricultural_1976]. The geography of *Cerrado* biome includes the Midwest and parts of the Southeast, North and Northeast region of Brazil (Figure 1). The *Cerrado* is characterized with favorable topography for agriculture but low soil fertility [@goedert_management_1983], which was mainly used for pastures. In the early 2000s, it was estimated that 11% and 41% of the *Cerrado* the area was covered with cropland and planted pastures, respectively [@klink_conservation_2005]. The cropland in the *Cerrado* expanded 81% from 2000 to 2014, mainly replacing poorly managed pastures [@zalles_near_2019].  No-till, crop succession, cover crops, and crop-livestock integration strategies have resulted in increased soil chemical and physical properties in Brazil, especially in the *Cerrado* biome [@yamada_cerrado_2005; @de_moraes_integrated_2014].  
+
+The current expansion of cropland is occuring to the new *Cerrado* areas in the states of Maranhão, Tocantins, Piauí, Bahia (MA-TO-PI-BA) and in the Northeast and North parts of the Amazonian biome in the state of Pará (North region) [@zalles_near_2019; @lucio_dispersal_2019]. The steady increase of cropland in Brazil is partially due to the success of no-till and soybean production in the *Cerrado* [@fearnside_soybean_2001; @araujo_spatiotemporal_2019]. The importance of soybean for the Brazilian agriculture is highlighted in our survey as it is the most managed crop across the five major regions (Figure 2). Currently, there are 36 million ha of soybean grown with productivity of 119 million tonnes of grain, which makes soybean the top agricultural export commodity of Brazil [@oliveira_geopolitics_2016].
+
+
+## Weed Management
+
+### Herbicide Programs
+
+The wide adoption of no-till soybean systems in Brazil would be less likely without glyphosate. Because glyphosate is a non-selective and systemic herbicide, it provides high vegetation control [@duke_glyphosate:_2008]. Over 80% of respondents spray/manage burndown herbicides prior to annual crops establishment in Brazil (Table 3). High glyphosate reliance is clearly demonstrated as this is the main herbicide used for burndown weed control in several annual and perennial cropping-systems (Figure 3). The synthetic-auxin (e.g. 2,4-D), photosystem I (PSI)- (e.g., paraquat) and protoporphyrinogen oxidase (PPO)- (e.g., saflufenacil) inhibitor herbicides are additional  herbicide options sprayed as part of burndown programs. Burndown glyphosate application is also commonly used to  terminate cover crop species, no-till crop establishment. The survey also showed glyphosate as a foundation for POST-emergence weed management in corn, cotton and soybean (Figure 3). For instance, it has been documented that within a soybean season, glyphosate is typically sprayed three times in Rio Grande do Sul state (RS, South region) [@da_rosa_ulguim_agronomic_2017]. 
+
+The use of PRE herbicides is not popular as burndown and POST herbicide programs (Table 3). PRE herbicides are costly, restricted due to crop succession [@reis_carryover_2018] and typically not adopted in absence of HR weeds. In addition, cover crop residue from burndown applications result in a physical barrier that may either prevent germination of early-season weed species [@altieri_enhancing_2011] or prevent sprayed PRE herbicide reaching the soil [@christoffoleti_conservation_2007], reducing PRE herbicide efficacy on weeds.
+
+
+### Troublesome and GR weeds
+
+Survey results indicate that the top five problematic weed species in Brazil are glyphosate-tolerant (*Ipomoea* spp. and *Commelina* spp.) and GR (*Conyza* spp., *D. insularis* and *E. indica*) (Figure 4). Distribution of troublesome (Figure 4) and GR weeds (Table 4A) varied across regions. Although ranked amongst the most problematic grass weed because of high capacity to evolve resistance to herbicides [@preston_decade_2009], *Lolium multiflorum* L., a cool-season grass, is mainly adapted to the South region of Brazil (Table 4B and Figure 4) [@lucio_dispersal_2019]. However, *Conyza* spp, an annual species adapted to no-till areas [@lucio_dispersal_2019; ], is reported as the most widespread weed species presented in nearly 50% of soybeans cropland of Brazil [@lucio_dispersal_2019]. Because of its intrinsic biology, *Conyza* spp. seeds may reach the planetary boundary layer (140 m) reaching 500 km seed dispersal [@shields_horseweed_2006], which strongly contributes for the spreading of *Conyza* spp. to adjacent and non-adjacent areas [@dauer_temporal_2007]. The seed-mediated flow also plays an important role in distribution of other herbicide resistance weeds. The first report of GR-*A. palmeri* and GR-*D. insularis* in South America were in Brazilian neighboring countries Argentina and Paraguay, respectively [@heap_list_2020]. It is hypothesized that seeds from these two weed species migrated to Brazil through equipment, human traffic, and/or animals. For example,  GR-*D. insularis* is widespread across Brazilian regions but was first reported in 2016 western Paraná (PR, south of Brazil) near Paraguay [@ovejero_frequency_2017]. Genetic similarities within GR-*D. insularis* biotypes from Paraguay and Paraná were found but not with GR *D. insularis* biotypes from Southeast and Midwest [@takano_spread_2018], suggesting that evolution of GR-*D. insularis* is occurring through seed-mediated flow and independent selection. 
+
+Although 83% of survey respondents are satisfied with their current levels of weed control (good or excellent;Table 4F), GR weeds have been documented in orchard, cereal, legume [@vilaaiub_glyphosate-resistant_2008-1], and are on the rise across Brazilian cropping-systems. Eight weed species have evolved resistance to glyphosate in Brazil, including four monocots and four dicots [@heap_list_2020; @takano_proline-106_2019; @brunharo_confirmation_2016; @kupper_multiple_2017]. Recent reports have documented glyphosate failure to control *A. hybridus* [@hrac-br_possible_2019] and *Echinochloa colona* [@pivetta_capim_2018] in Brazil. Other HR, including ALS-inhibitor herbicides are widespread in Brazil. For example, ALS-inhibitor herbicides are the foundation for weed control in rice, wheat, and soybeans (Figure 4), crops commonly grown in the South, and 87% of respondents are managing ALS-resistant weeds in that region (Table 4D). Weed resistance to ACCase-inhibitor herbicides is also a major problem in Brazil. The weed species *Urochloa plantaginea*, *Digitaria ciliaris*, *E. indica*, *Lolium* spp., *A. fatua*, *Echinochloa crus-galli*, and *D. insularis* have evolved resistance to ACCase-inhibitor herbicides [@heap_list_2020]. The number of biotypes with multiple HR in increasing in Brazil, including *E. indica*, *E. crus-galli*, and *D. insularis* with resistance to ACCase-, ALS-, and/or EPSPS-inhibitors. Moreover, a *Conyza* spp. biotype was reported resistant to 2,4-D, PSI-, PSII-, PPO-, and EPSPS- inhibitor herbicides [@heap_list_2020], which certainly increases the complexity of weed management in cropping-systems where such biotypes are present.
+
+
+### New Technologies: 2,4-D and Dicamba
+
+Our survey shows respondents willingness to adopt synthetic AR crops (57%) in Brazil (Figure 5). Dicamba and 2,4-D provide effective control of broadleaf but no grass weed species control. It has been demonstrated the effective control of dicamba on *Amaranthus* spp. [@schryver_control_2017] and 2,4-D on *Conyza* ssp [@frene_enlist_2018]. Over 90% of growers surveyed in Nebraska reported weed management improve after using DR crops [@werle_survey_2018]. However, if adopted, dicamba or 2,4-D would have to be mixed with a graminicide herbicides given main weed problems in Brazil are GR grasses, such as *D. insularis*, *Eleusine indica*, and *Lolium multiflorum* [@lucio_dispersal_2019]. Studies documented that tank mixing 2,4-D [@li_24-d_2020] or dicamba [@underwood_addition_2016; @hart_dicamba_1996] antagonizes grass weed control. In addition, dicamba with glyphosate reduces pH, resulting in increased dicamba concentration in the air [@mueller_dicamba_2019; @mueller_spray_2019]. Therefore, 2,4-D and dicamba has not benefit managing grass weed species and which raises the concerns of OTM in Brazil.  
+
+The OTM of dicamba or 2,4-D leading to injury in sensitive vegetation is currently a major issue in the United States [@kniss_soybean_2018; @knezevic_sensitivity_2018; @soltani_off-target_2020]
+Studies documented that dicamba concentration in the air following application increased with temperature [@mueller_dicamba_2019; @jones_off-target_2019]. In Brazil, climatic conditions vary from tropical (with or without a dry season) to subtropical, with annual mean temperatures > 26 C in agricultural areas [@alvares_koppens_2013]. In addition. dicamba or 2,4-D sensitive crops such as grapes, vegetables, orchards, soybean (*Glycine max* L. Merr), cotton (*Gossypium hirsutum* L.), common bean (*Phaseolus vulgaris*) are largely grown in Brazil. Micro-rates of dicamba or 2,4-D may cause visible injury on non-AR soybeans [@osipitan_glyphosate-resistant_2019], grapes [@mohseni-moghadam_response_2016], and tomato [@knezevic_sensitivity_2018]. With AR crops, 2,4-D and dicamba herbicides are likely to be sprayed in large areas, which increases the chances of OTM onto sensitive vegetation. In Brazil, there is no published data regarding potential off-target movement of new dicamba or 2,4-D formulations. Further studies are needed to evaluate the impact of spraying large areas with dicamba and 2,4-D under tropical conditions. With the introduction of synthetic AR crops in Brazil, spraying dicamba and 2,4-D may require restrictions and extra herbicide applicator training. Although it is not required in the country, nearly 70% of survey respondents said applicators received some form of training. 
+
+## Limitations for Weed Management 
+
+As highlighted in our survey, HR weeds are a major constraint for weed management in Brazil (Table 6A). Although Brazil has fewer documented cases of HR weeds when compared to Australia, United States, and Canada [@heap_list_2020], the upcoming AR crops technologies do not address the current HR-grass weed problems in the country. Managing HR weeds in Brazil may require additional adoption of non chemical strategies or introduction of new herbicide SOA effective on grass species. Brazilian growers already employ multiple effective non chemical strategies, including diversity of crops, crop succession in season, no-till, cover crops, and/or cultural weed management (Table 4E). A new non chemical weed control strategy, harvest seed weed control [@walsh_harrington_2012], is a valuable tool for minimizing HR weeds but is still neither available nor evaluated/studied, to our knowledge, in Brazil. Nonetheless, the evolution of HR grass weed species and absence of new effective technologies are threatening the sustainability of Brazilian agricultural production.
+
+Survey respondents reported industry as the main source of information for crop and weed management in Brazil (Table 6B). Despite being incredibly valuable, industry information can be biased towards portfolios. In contrast, sources of unbiased information from basic and applied research are public institutions, including Universities and Embrapa (Brazilian Agricultural Research Corporation). Therefore, there is a need for an increase on collaborative work on basic and applied research in Brazil due to the upcoming weed herbicide resistance crisis and introduction of novel and complex to adopt technologies which will demand research and education for proper adoption.
+
+
+# Conclusion
+
+The survey results presented herein highlighted the current status and the difference in cropping-systems and weed management practices adopted across Brazil. Our survey showed the trends in conservation agricultural practices and advances the knowledge regarding current weed management strategies of Brazilian agriculture. Brazilian stakeholders are progressive in the sense of adopting conservation agricultural practices and new technologies. However, introduction of new technologies focused on the United States (e.g., synthetic AR crops) for weed management may not address the major weed problems in Brazil but potentially generate a new challenge, OTM of herbicides into sensitive vegetation. Therefore, we urge that academics, growers, industry and policy makers (1) expand monitoring herbicide resistance weeds, (2) the increase research on non-chemical weed management strategies and (3) increase investments on public databases, surveys, basic and applied research to support decisions regarding the introduction and adoption of novel agricultural technologies.  
+
+
+# Acknowledgements
+
+This research received no specific grant from any funding agency, commercial or not-for-profit sectors. The authors would like to thank all respondents for participating in the survey and Dr. Dênis Mariano for developing Figure 1.
+
+
+# Conflicts of Interest
+
+No conflicts of interest have been declared.
+
+
+# References
+
+
+<div id = "refs"></div>
+
+
+\eleft
+
+\clearpage
+
+
+\listoftables
+
+
+\newpage
+
+\begin{table}[ht!]
+\centering
+\caption{Respondents demographics of the 2018 Cropping systems weed management survey.}
+\label{tab:my-table}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+                            & \multicolumn{6}{c}{Region}                               \\ \cmidrule(l){2-7} 
+Demographics                & Brazil & North & Northeast & Midwest & Southeast & South \\ \hline
+                            & \multicolumn{6}{c}{--------\%--------}                           \\ 
+A. Respondents (n=279)      &        & 4     & 8         & 23      & 38        & 43    \\
+B. Hectares managed (n=123) &        & 9     & 6         & 43      & 41        & 14    \\
+\hspace{6mm} Hectares (ha)       &   5.7 mi     &       &           &         &           &       \\
+C. Role (n=277)             &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Agronomist}         & 69     & 68    & 68        & 68      & 73        & 61    \\
+\hspace{3mm}\textit{Consultant}         & 9      & 0     & 14        & 16      & 13        & 3     \\
+\hspace{3mm}\textit{Industry}           & 22     & 45    & 36        & 35      & 26        & 13    \\
+\hspace{3mm}\textit{Grower}             & 21     & 18    & 5         & 22      & 24        & 17    \\
+\hspace{3mm}\textit{University}         & 22     & 18    & 18        & 11      & 26        & 22    \\
+\hspace{3mm}\textit{Other}              & 7      & 7     & 8         & 3       & 4         & 11    \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+
+
+\begin{table}[ht!]
+\centering
+\caption{Cropping-system managament strategies adopted in Brazil according to the 2018 cropping systems weed management survey.}
+\label{tab:my-table}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+                                  & \multicolumn{6}{c}{Region}                               \\ \cmidrule(l){2-7} 
+Cropping systems                  & Brazil & North & Northeast & Midwest & Southeast & South \\ \hline 
+                                  & \multicolumn{6}{c}{--------\%--------}                             \\ 
+A. Conservation tillage (no-till) &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Yes}                      & 61     & 55    & 50        & 71      & 51        & 67    \\
+\hspace{3mm}\textit{Partially}                & 22     & 27    & 18        & 18      & 18        & 27    \\
+\hspace{3mm}\textit{No}                       & 16     & 18    & 32        & 11      & 31        & 6     \\
+\hspace{3mm}\textit{n}                        & 273    & 11    & 22        & 63      & 99        & 119   \\
+B. Cover crop                     &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Yes}                      & 61     & 55    & 55        & 58      & 52        & 68    \\
+\hspace{3mm}\textit{No}                       & 39     & 45    & 45        & 42      & 48        & 32    \\
+\hspace{3mm}\textit{n}                        & 273    & 11    & 22        & 7       & 99        & 119   \\
+C. Cover crop species             &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Avena sativa L.}               & 48     & 0     & 5         & 7       & 50        & 50    \\
+\hspace{3mm}\textit{Brassica rapa}            & 16     & 0     & 5         & 7       & 14        & 17    \\
+\hspace{3mm}\textit{Crotalaria juncea L.}                & 27     & 0     & 14        & 28      & 91        & 5     \\
+\hspace{3mm}\textit{Lolium multiflorum L.}         & 22     & 0     & 0         & 2       & 9         & 27    \\
+\hspace{3mm}\textit{Pennisetum glaucum}             & 29     & 27    & 27        & 28      & 68        & 6     \\
+\hspace{3mm}\textit{Urochloa spp.}               & 27     & 27    & 27        & 37      & 68        & 4     \\
+\hspace{3mm}\textit{Other}                    & 3      & 1     & 2         & 1       & 7         & 2     \\
+\hspace{3mm}\textit{n}                        & 143    & 11    & 22        & 57      & 22        & 113   \\
+D. Crop-livestock integration     &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Yes}                      & 37     & 45    & 14        & 46      & 22        & 48    \\
+\hspace{3mm}\textit{No}                       & 63     & 55    & 86        & 54      & 78        & 52    \\
+\hspace{3mm}\textit{n}                        & 256    & 11    & 22        & 57      & 93        & 114   \\ 
+E. Crop succession                &        &       &           &         &           &       \\
+\hspace{3mm}\textit{1}                        & 29     & 9     & 36        & 7       & 27        & 34    \\
+\hspace{3mm}\textit{2}                        & 41     & 64    & 41        & 74      & 43        & 29    \\
+\hspace{3mm}\textit{3}                        & 30     & 27    & 23        & 20      & 29        & 37    \\
+\hspace{3mm}\textit{n}                        & 271    & 11    & 22        & 61      & 99        & 119   \\
+F. Irrigation                     &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Yes}                      & 18     & 9     & 14        & 6       & 17        & 24    \\
+\hspace{3mm}\textit{Partially}                & 32     & 9     & 41        & 33      & 34        & 29    \\
+\hspace{3mm}\textit{No}                       & 50     & 82    & 45        & 60      & 48        & 47    \\
+\hspace{3mm}\textit{n}                        & 272    & 11    & 22        & 63      & 99        & 119   \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{table}[ht!]
+\centering
+\caption{Herbicide program for weed managament in multiple crops in Brazil according to the 2018 Cropping systems weed management survey.}
+\label{tab:my-table}
+\begin{tabular}{lllll}
+\hline
+\multirow{2}{*}{Crops} & \multicolumn{4}{c}{Weed Management Program}             \\ \cline{2-5} 
+                       & Burndown & PRE & POST & Harvest aid \\ \hline
+                       & \multicolumn{4}{c}{--------\%--------}                  \\
+Corn (n=119)           & 85       & 41            & 92             & -           \\
+Cotton (n=23)          & 87       & 70            & 87             & 39          \\
+Coffee (n=20)          & 35       & 25            & 85             & -           \\
+Citrus (n=19)          & 32       & 16            & 68             & -           \\
+Eucaliptus (n=15)      & 80       & 47            & 67             & -           \\
+Rice (n=45)            & 91       & 76            & 93             & -           \\
+Common bean (n=57)     & 93       & 44            & 81             & 58          \\
+Sorghum (n=22)         & 100      & 55            & 68             & -           \\
+Soybean (n=159)        & 82       & 53            & 81             & 61          \\
+Sugarcane (n=31)       & 71       & 87            & 77             & -           \\
+Vegetables (n=16)      & 69       & 50            & 69             & -           \\
+Wheat (n=33)           & 100      & 33            & 94             & 30          \\
+Winter crops (n=30)    & 97       & 20            & 70             & -           \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+\newpage
+
+
+
+
+
+\begin{table}[ht!]
+\centering
+\caption{Weed managament strategies in Brazil according to the 2018 Cropping systems weed management survey.}
+\label{tab:my-table}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+                                       & \multicolumn{6}{c}{Region}                               \\ \cmidrule(l){2-7} 
+Weed Management                        & Brazil & North & Northeast & Midwest & Southeast & South \\ \hline
+                                       & \multicolumn{6}{c}{--------\%--------}                             \\ 
+A. Glyphosate resistance               &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Yes}                           & 74     & 73    & 64        & 79      & 73        & 80    \\
+\hspace{3mm}\textit{Not sure}                      & 12     & 18    & 27        & 12      & 13        & 7     \\
+\hspace{3mm}\textit{No}                            & 14     & 9     & 9         & 9       & 14        & 13    \\
+\hspace{3mm}\textit{n}                             & 258    & 11    & 22        & 57      & 94        & 114   \\
+B. Glyphosate resistant weeds          &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Amaranthus palmeri}            & 2      & 0     & 4         & 4       & 1         & 0     \\
+\hspace{3mm}\textit{Choris elata}                  & 7      & 13    & 7         & 7       & 6         & 9     \\
+\hspace{3mm}\textit{Conyza spp.}                   & 82     & 88    & 79        & 71      & 79        & 91    \\
+\hspace{3mm}\textit{Digitaria insularis}           & 56     & 75    & 79        & 91      & 82        & 25    \\
+\hspace{3mm}\textit{Eleusine indica}               & 31     & 50    & 43        & 44      & 28        & 25    \\
+\hspace{3mm}\textit{Lolium multiflorum L.}                   & 28     & 13    & 14        & 9       & 10        & 54    \\
+\hspace{3mm}\textit{n}                             & 190    & 8     & 14        & 45      & 67        & 91    \\
+C. Other herbicide resistance &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Yes}                           & 46     & 55    & 50        & 79      & 37        & 54    \\
+\hspace{3mm}\textit{Not sure}                               & 24     & 36    & 23        & 12      & 29        & 19    \\
+\hspace{3mm}\textit{No}                            & 30     & 9     & 27        & 9       & 34        & 26    \\
+\hspace{3mm}\textit{n}                             & 257    & 11    & 22        & 57      & 94        & 114   \\
+D. Herbicide resistance SOA   &        &       &           &         &           &       \\
+\hspace{3mm}\textit{ALS inhibitor}                & 78     & 50    & 63        & 76      & 73        & 87    \\
+\hspace{3mm}\textit{ACCase inhibitor}              & 31     & 50    & 63        & 44      & 46        & 21    \\
+\hspace{3mm}\textit{HPPD inhibitor}                & 7      & 25    & 38        & 0       & 12        & 2     \\
+\hspace{3mm}\textit{PSI inhibitor}                 & 13     & 0     & 38        & 8       & 23        & 10    \\
+\hspace{3mm}\textit{PSII inhibitor}                & 12     & 25    & 38        & 16      & 19        & 6     \\
+\hspace{3mm}\textit{PPO inhibitor}                 & 11     & 50    & 13        & 16      & 19        & 10    \\
+\hspace{3mm}\textit{Synthetic auxin}               & 13     & 25    & 13        & 0       & 8         & 2     \\
+\hspace{3mm}\textit{LCFA inhibitor}                & 4      & 25    & 13        & 0       & 8         & 2     \\
+\hspace{3mm}\textit{n}                             & 97     & 4     & 8         & 25      & 26        & 52    \\
+E. Alternative weed control            &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Biological}                    & 5      & 0     & 6         & 2       & 3         & 6     \\
+\hspace{3mm}\textit{Cultural}                      & 71     & 100   & 33        & 77      & 65        & 76    \\
+\hspace{3mm}\textit{Mechanical}                    & 45     & 25    & 50        & 33      & 58        & 41    \\
+\hspace{3mm}\textit{Physical}                               & 15     & 13    & 0         & 2       & 12        & 24    \\
+\hspace{3mm}\textit{None}                                   & 15     & 0     & 31        & 14      & 15        & 14    \\
+\hspace{3mm}\textit{n}                                      & 192    & 8     & 16        & 43      & 66        & 87    \\
+F. Level of weed control               &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Excelent}                               & 12     & 44    & 19        & 29      & 17        & 4     \\
+\hspace{3mm}\textit{Good}                                  & 71     & 56    & 63        & 64      & 70        & 71    \\
+\hspace{3mm}\textit{Low}                                   & 18     & 0     & 19        & 7       & 13        & 24    \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+\newpage
+
+
+\begin{table}[]
+\centering
+\caption{Herbicide application technology in Brazil according to the 2018 Cropping systems weed management survey.}
+\label{tab:my-table}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+\multirow{2}{*}{Herbicide application} & \multicolumn{6}{c}{Region}                               \\ \cmidrule(l){2-7} 
+                                       & Brazil & North & Northeast & Midwest & Southeast & South \\ \midrule
+A. Responsible for application         & \multicolumn{6}{c}{--------\%--------}                             \\
+\hspace{3mm}\textit{Ag technician}                 & 17     & 22    & 24        & 20      & 20        & 19    \\
+\hspace{3mm}\textit{Agronomist}                    & 30     & 67    & 47        & 30      & 40        & 19    \\
+\hspace{3mm}\textit{Applicator specialist}         & 21     & 44    & 18        & 32      & 24        & 15    \\
+\hspace{3mm}\textit{Co-op}                         & 3      & 0     & 0         & 0       & 4         & 4     \\
+\hspace{3mm}\textit{Grower}                        & 50     & 56    & 41        & 32      & 36        & 71    \\
+\hspace{3mm}\textit{Farm employees}                & 50     & 33    & 29        & 68      & 56        & 38    \\
+\hspace{3mm}\textit{n}                             & 202    & 9     & 17        & 44      & 70        & 91    \\
+B. Herbicide application training      &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Yes}                           & 69     & 89    & 64        & 84      & 81        & 56    \\
+\hspace{3mm}\textit{Not sure}                      & 16     & 11    & 18        & 7       & 10        & 21    \\
+\hspace{3mm}\textit{No}                            & 15     & 0     & 18        & 9       & 9         & 23    \\
+\hspace{3mm}\textit{n}                             & 202    & 9     & 17        & 44      & 70        & 91    \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\pagebreak
+\newpage
+
+\begin{table}[ht]
+\centering
+\caption{General questions regarding weed management strategies in Brazil according to the 2018 Cropping systems weed management survey}
+\label{tab:my-table}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+\multirow{2}{*}{General questions} & \multicolumn{6}{c}{Region}                               \\ \cmidrule(l){2-7} 
+                                   & Brazil & North & Northeast & Midwest & Southeast & South \\ \midrule
+A. Limitations                     & \multicolumn{6}{c}{--------\%--------}                             \\
+\hspace{3mm}\textit{Costs}                     & 53     & 63    & 81        & 32      & 56        & 47    \\
+\hspace{3mm}\textit{Limited herbicide options} & 38     & 0     & 35        & 21      & 34        & 38    \\
+\hspace{3mm}\textit{Labor}                     & 18     & 0     & 13        & 7       & 15        & 20    \\
+\hspace{3mm}\textit{Legislation}               & 30     & 25    & 13        & 13      & 29        & 31    \\
+\hspace{3mm}\textit{Weed resistance}           & 69     & 75    & 56        & 38      & 59        & 78    \\
+\hspace{3mm}\textit{n}                         & 198    & 8     & 16        & 90      & 68        & 90    \\
+B. Source of information           &        &       &           &         &           &       \\
+\hspace{3mm}\textit{Consultant}                & 30     & 44    & 25        & 38      & 35        & 24    \\
+\hspace{3mm}\textit{Embrapa}                   & 43     & 11    & 31        & 41      & 42        & 49    \\
+\hspace{3mm}\textit{Industry}                  & 54     & 78    & 31        & 55      & 65        & 50    \\
+\hspace{3mm}\textit{University}                & 52     & 44    & 56        & 48      & 52        & 56    \\
+\hspace{3mm}\textit{State entities}            & 43     & 22    & 38        & 48      & 36        & 47    \\
+\hspace{3mm}\textit{n}                         & 199    & 9     & 16        & 44      & 69        & 90    \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+```{r sessioninfo, echo = FALSE, eval = FALSE}
+# set eval = FALSE if you don't want this info (useful for reproducibility) to appear 
+sessionInfo()
+```
+
+

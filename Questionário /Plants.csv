@@ -1,0 +1,97 @@
+Species,Regiao,Perc
+arroz vermelho ,Brasil,18
+azevem ,Brasil,17
+buva,Brasil,66
+capim colchao,Brasil,18
+capim massambara ,Brasil,5
+capim-amargoso ,Brasil,53
+capim-branco ,Brasil,3
+capim-pe-de-galinha,Brasil,36
+caruru ,Brasil,16
+corda-de-viola,Brasil,41
+leiteiro ,Brasil,20
+Palmer ,Brasil,2
+picao ,Brasil,22
+poaia-branca ,Brasil,17
+tiririca ,Brasil,32
+trapoeraba ,Brasil,37
+arroz vermelho ,Centro,2
+azevem ,Centro,5
+buva,Centro,56
+capim colchao,Centro,16
+capim massambara ,Centro,9
+capim-amargoso ,Centro,88
+capim-branco ,Centro,4
+capim-pe-de-galinha,Centro,47
+caruru ,Centro,14
+corda-de-viola,Centro,46
+leiteiro ,Centro,30
+Palmer ,Centro,4
+picao ,Centro,21
+poaia-branca ,Centro,19
+tiririca ,Centro,21
+trapoeraba ,Centro,49
+arroz vermelho ,Nordeste,9
+azevem ,Nordeste,5
+buva,Nordeste,36
+capim colchao,Nordeste,9
+capim massambara ,Nordeste,18
+capim-amargoso ,Nordeste,77
+capim-branco ,Nordeste,5
+capim-pe-de-galinha,Nordeste,36
+caruru ,Nordeste,27
+corda-de-viola,Nordeste,45
+leiteiro ,Nordeste,27
+Palmer ,Nordeste,5
+picao ,Nordeste,36
+poaia-branca ,Nordeste,18
+tiririca ,Nordeste,41
+trapoeraba ,Nordeste,55
+arroz vermelho ,Norte,9
+azevem ,Norte,0
+buva,Norte,36
+capim colchao,Norte,27
+capim massambara ,Norte,9
+capim-amargoso ,Norte,91
+capim-branco ,Norte,0
+capim-pe-de-galinha,Norte,55
+caruru ,Norte,18
+corda-de-viola,Norte,55
+leiteiro ,Norte,45
+Palmer ,Norte,0
+picao ,Norte,18
+poaia-branca ,Norte,0
+tiririca ,Norte,73
+trapoeraba ,Norte,73
+arroz vermelho ,Sudeste,1
+azevem ,Sudeste,9
+buva,Sudeste,60
+capim colchao,Sudeste,26
+capim massambara ,Sudeste,8
+capim-amargoso ,Sudeste,72
+capim-branco ,Sudeste,2
+capim-pe-de-galinha,Sudeste,26
+caruru ,Sudeste,24
+corda-de-viola,Sudeste,57
+leiteiro ,Sudeste,24
+Palmer ,Sudeste,4
+picao ,Sudeste,27
+poaia-branca ,Sudeste,13
+tiririca ,Sudeste,38
+trapoeraba ,Sudeste,51
+arroz vermelho ,Sul,39
+azevem ,Sul,34
+buva,Sul,80
+capim colchao,Sul,12
+capim massambara ,Sul,1
+capim-amargoso ,Sul,26
+capim-branco ,Sul,4
+capim-pe-de-galinha,Sul,37
+caruru ,Sul,12
+corda-de-viola,Sul,27
+leiteiro ,Sul,14
+Palmer ,Sul,0
+picao ,Sul,17
+poaia-branca ,Sul,19
+tiririca ,Sul,31
+trapoeraba ,Sul,23

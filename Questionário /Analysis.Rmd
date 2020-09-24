@@ -1,0 +1,196 @@
+---
+title: "Map"
+author: "Maxwel Coura Oliveira"
+date: "7/20/2018"
+output: html_document
+---
+
+
+```{r include=FALSE}
+#library(brazilmaps)
+library(ggmap)
+library(tidyverse)
+library(ggplot2)
+library(ggmap)
+library(maps)
+library(grid)
+library(mapdata)
+library(maptools)
+library(stringr)
+library(dplyr)
+library(ggthemes)
+library(ggsn)
+library(ggthemes)
+```
+
+
+
+```{r}
+Survey<-read_csv("Data.csv")
+dplyr::tbl_df(Survey)
+glimpse(Survey)
+```
+
+```{r}
+Survey %>% 
+  drop_na(Hectares) %>% 
+  select(Estado, Regiao, Hectares) %>% 
+    group_by(Regiao) %>% 
+  summarise(avg = mean(Hectares)) 
+```
+
+
+
+
+
+
+```{r}
+data("pop2017")
+map_sul <- get_brmap(geo = "City", geo.filter = list(Region = 4))
+mapa1 <- plot_brmap(map_sul,
+data_to_join = pop2017,
+join_by = c("City" = "mun"),
+var = "pop2017")
+
+
+# Output is ggplot object so it can be extended
+# with any number of ggplot layers
+library(ggplot2)
+mapa1 +
+labs(title = "População Municipal 2017 - Região Sul")
+# Only displaying the microregions of the state of Sao Paulo
+map_sp_micro <- get_brmap(geo = "MicroRegion",
+geo.filter = list(State = 35),
+class = "SpatialPolygonsDataFrame")
+plot_brmap(map_sp_micro)
+```
+
+
+```{r}
+Map <- get_brmap(geo = "State", class = "sf")
+
+plot_brmap(Map) + geom_point(data=Survey, aes(x=Longitude, y=Latitude), size=0.5) +
+  labs(fill="", y="", x="") + theme_map() +
+  #north(Map, location = 'topleft', symbol = 1, anchor = c(x = 0, y = -70)) +
+  #scalebar(data=Map, dist = 100, dd2km = T, model = 'International', location = "topright") +
+  theme(axis.text=element_blank(),
+        axis.title=element_blank(),
+  legend.position=c(0.115,0.18), legend.text = element_text(size = 16, colour = "black"), legend.key = element_rect(fill=NA), panel.border = element_rect(fill=NA,color="black", size=0.5, linetype="solid"),
+legend.background = element_rect(fill =NA), legend.key.width = unit(2.2, "line"), legend.title=element_blank()) + 
+  ggsave("map.tiff", 
+   units="in", width=6, height=6, dpi=300) 
+```
+
+
+
+
+
+```{r Regiao}
+Sul = Survey %>% 
+  filter(Regiao == "Sul" | Regiao == "Sul, Sudeste")
+```
+
+
+```{r}
+Sul %>%
+  group_by(Estado) %>% 
+  count(Ocupacao) %>%
+  mutate(prop = prop.table(n)*100)
+```
+
+
+
+
+```{r Sul HA}
+Sul %>%  
+   group_by(Estado) %>% 
+   summarise(Min = min(Hectares, na.rm=TRUE),
+                     Median = median(Hectares, na.rm=TRUE),
+                     Mean = mean(Hectares, na.rm=TRUE),
+                     Var = var(Hectares, na.rm=TRUE),
+                     SD = sd(Hectares, na.rm=TRUE),
+                     Max = max(Hectares, na.rm=TRUE),
+                     N = n()) %>% 
+   arrange(desc(Mean))
+```
+
+
+
+
+
+```{r}
+Sul %>%
+  group_by(Estado) %>% 
+  count(Culturas, sort=TRUE, na.rm=TRUE) %>% 
+  arrange(Estado) %>% 
+  mutate(prop = prop.table(n)*100)
+
+```
+
+
+```{r Quantas culturas no ano}
+Sul %>% 
+  group_by(Estado) %>% 
+  count(Ano, sort=TRUE, na.rm=TRUE) %>% 
+  arrange()
+
+
+
+Sul %>% 
+  count(Ano, sort=TRUE, na.rm=TRUE) %>% 
+  arrange() %>% 
+  mutate(prop = prop.table(n)*100)
+
+```
+
+
+
+
+```{r Irrigado}
+Sul %>% 
+  group_by(Estado) %>% 
+  count(Irrigado, sort=TRUE, na.rm=TRUE) %>% 
+  arrange()
+
+
+
+Sul %>% 
+  count(Irrigado, sort=TRUE, na.rm=TRUE) %>% 
+  arrange() %>% 
+  mutate(prop = prop.table(n)*100)
+```
+
+
+
+```{r Plantio direto}
+Sul %>% 
+  group_by(Estado) %>% 
+  count(SPD, sort=TRUE, na.rm=TRUE) %>% 
+  arrange(Estado) %>% 
+  mutate(prop = prop.table(n)*100)
+
+
+
+Sul %>% 
+  count(SPD, sort=TRUE, na.rm=TRUE) %>% 
+  arrange() %>% 
+  mutate(prop = prop.table(n)*100)
+```
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

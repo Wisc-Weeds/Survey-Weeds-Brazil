@@ -1,0 +1,67 @@
+Ocupacao,Regiao,Perc
+Agronomo,Sul,61
+Comercial (Gerencia/ATC/RTV/MKT),Sul,8
+Estudante,Sul,19
+Extensionista agricola,Sul,17
+Pesquisador em empresa,Sul,5
+Pesquisador publico,Sul,7
+Produtor rural,Sul,17
+Professor ,Sul,3
+Tecnico agricola,Sul,17
+Consultor,Sul,3
+Funcionario da propriedade rural,Sul,2
+Agronomo,Sudeste,73.33333333
+Comercial (Gerencia/ATC/RTV/MKT),Sudeste,15.23809524
+Estudante,Sudeste,15.23809524
+Extensionista agricola,Sudeste,3.80952381
+Pesquisador em empresa,Sudeste,10.47619048
+Pesquisador publico,Sudeste,5.714285714
+Produtor rural,Sudeste,23.80952381
+Professor ,Sudeste,10.47619048
+Tecnico agricola,Sudeste,4.761904762
+Consultor,Sudeste,13.33333333
+Funcionario da propriedade rural,Sudeste,1.904761905
+Agronomo,Centro,68.25396825
+Comercial (Gerencia/ATC/RTV/MKT),Centro,9.523809524
+Estudante,Centro,6.349206349
+Extensionista agricola,Centro,3.174603175
+Pesquisador em empresa,Centro,25.3968254
+Pesquisador publico,Centro,4.761904762
+Produtor rural,Centro,22.22222222
+Professor ,Centro,4.761904762
+Tecnico agricola,Centro,4.761904762
+Consultor,Centro,15.87301587
+Funcionario da propriedade rural,Centro,0
+Agronomo,Nordeste,68.18181818
+Comercial (Gerencia/ATC/RTV/MKT),Nordeste,9.090909091
+Estudante,Nordeste,4.545454545
+Extensionista agricola,Nordeste,9.090909091
+Pesquisador em empresa,Nordeste,27.27272727
+Pesquisador publico,Nordeste,4.545454545
+Produtor rural,Nordeste,4.545454545
+Professor ,Nordeste,13.63636364
+Tecnico agricola,Nordeste,18.18181818
+Consultor,Nordeste,13.63636364
+Funcionario da propriedade rural,Nordeste,0
+Agronomo,Norte,73
+Comercial (Gerencia/ATC/RTV/MKT),Norte,9
+Estudante,Norte,18
+Extensionista agricola,Norte,18
+Pesquisador em empresa,Norte,36
+Pesquisador publico,Norte,9
+Produtor rural,Norte,18
+Professor ,Norte,0
+Tecnico agricola,Norte,0
+Consultor,Norte,0
+Funcionario da propriedade rural,Norte,0
+Agronomo,Brasil,68.59205776
+Comercial (Gerencia/ATC/RTV/MKT),Brasil,12.27436823
+Estudante,Brasil,16.24548736
+Extensionista agricola,Brasil,9.386281588
+Pesquisador em empresa,Brasil,9.747292419
+Pesquisador publico,Brasil,5.776173285
+Produtor rural,Brasil,20.57761733
+Professor ,Brasil,6.137184116
+Tecnico agricola,Brasil,11.55234657
+Consultor,Brasil,9.025270758
+Funcionario da propriedade rural,Brasil,1.444043321

@@ -1,0 +1,49 @@
+Regiao,Herbicida,Perc
+Sul,Inibidores da ALS ,87
+Sul,Inibidores de fotossistema I ,10
+Sul,Inibidores de fotossistema II ,6
+Sul,Inibidores da ACCase ,21
+Sul,Inibidores da PPO,10
+Sul,Mimetizadores da auxina,10
+Sul,Inibidores da sintese de carotenoides ,2
+Sul,Inibidores da divisao celular ou VLCFA,2
+Sudeste,Inibidores da ALS ,73
+Sudeste,Inibidores de fotossistema I ,23
+Sudeste,Inibidores de fotossistema II ,19
+Sudeste,Inibidores da ACCase ,46
+Sudeste,Inibidores da PPO,19
+Sudeste,Mimetizadores da auxina,15
+Sudeste,Inibidores da sintese de carotenoides ,12
+Sudeste,Inibidores da divisao celular ou VLCFA,8
+Centro,Inibidores da ALS ,76
+Centro,Inibidores de fotossistema I ,8
+Centro,Inibidores de fotossistema II ,16
+Centro,Inibidores da ACCase ,44
+Centro,Inibidores da PPO,16
+Centro,Mimetizadores da auxina,16
+Centro,Inibidores da sintese de carotenoides ,0
+Centro,Inibidores da divisao celular ou VLCFA,0
+Nordeste,Inibidores da ALS ,63
+Nordeste,Inibidores de fotossistema I ,38
+Nordeste,Inibidores de fotossistema II ,38
+Nordeste,Inibidores da ACCase ,63
+Nordeste,Inibidores da PPO,13
+Nordeste,Mimetizadores da auxina,0
+Nordeste,Inibidores da sintese de carotenoides ,38
+Nordeste,Inibidores da divisao celular ou VLCFA,13
+Norte,Inibidores da ALS ,50
+Norte,Inibidores de fotossistema I ,0
+Norte,Inibidores de fotossistema II ,25
+Norte,Inibidores da ACCase ,50
+Norte,Inibidores da PPO,50
+Norte,Mimetizadores da auxina,25
+Norte,Inibidores da sintese de carotenoides ,25
+Norte,Inibidores da divisao celular ou VLCFA,25
+Brasil,Inibidores da ALS ,78
+Brasil,Inibidores de fotossistema I ,13
+Brasil,Inibidores de fotossistema II ,12
+Brasil,Inibidores da ACCase ,31
+Brasil,Inibidores da PPO,11
+Brasil,Mimetizadores da auxina,13
+Brasil,Inibidores da sintese de carotenoides ,7
+Brasil,Inibidores da divisao celular ou VLCFA,4

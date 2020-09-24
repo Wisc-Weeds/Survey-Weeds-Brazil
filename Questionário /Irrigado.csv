@@ -1,0 +1,19 @@
+Irrigado,Regiao,Perc
+Sim,Norte,9
+Parcialmente,Norte,9
+Nao ,Norte,82
+Sim,Nordeste,14
+Parcialmente,Nordeste,41
+Nao ,Nordeste,45
+Sim,Centro,7
+Parcialmente,Centro,33
+Nao ,Centro,60
+Sim,Sudeste,17
+Parcialmente,Sudeste,34
+Nao ,Sudeste,49
+Sim,Sul,24
+Parcialmente,Sul,29
+Nao ,Sul,47
+Sim,Brasil,18
+Parcialmente,Brasil,32
+Nao ,Brasil,50

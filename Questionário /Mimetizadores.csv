@@ -1,0 +1,19 @@
+Regiao ,Resposta,Perc
+Norte,Sim,56
+Norte,Parcialmente,33
+Norte,Nao,11
+Nordeste,Sim,54
+Nordeste,Parcialmente,23
+Nordeste,Nao,23
+Centro,Sim,60
+Centro,Parcialmente,21
+Centro,Nao,19
+Sudeste,Sim,64
+Sudeste,Parcialmente,20
+Sudeste,Nao,16
+Sul,Sim,55
+Sul,Parcialmente,42
+Sul,Nao,3
+Brasil,Sim,57
+Brasil,Parcialmente,34
+Brasil,Nao,9

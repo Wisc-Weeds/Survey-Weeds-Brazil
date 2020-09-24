@@ -1,0 +1,430 @@
+---
+title: "Blog"
+author: "Maxwel Coura Oliveira"
+date: "9/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(gganimate)
+library(png)
+library(grid)
+library(ggthemes)
+```
+
+```{r Names Culturas, include=FALSE}
+Culturas=read_csv("Culturas.csv")
+```
+
+
+```{r Names Culturas, include=FALSE}
+Culturas$Culturas <-factor(Culturas$Culturas, levels=c("Citrus", "Cafe", "Milho", "Algodao", "Feijao", "Eucalipto", "Pastagem", "Arroz",  "Sorgo",  "Soja", "Cana-de-acuca", "HF", "Trigo", "Culturas de inverno (aveia, cevada, triticale)"), labels=c("Citrus", "Café", "Milho", "Algodão", "Feijão", "Eucalipto", "Pastagem", "Arroz",  "Sorgo",  "Soja", "Cana-de-açucar", "Olerícolas", "Trigo", "Culturas de inverno"))
+
+Culturas$Regiao <-factor(Culturas$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil", "Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul"))
+```
+
+
+```{r Culturas Figura}
+Culturas <- Culturas %>% 
+  mutate(Culturas = factor(Culturas, levels = c("Pastagem", "Eucalipto", "Citrus", "Café", "Olerícolas", "Algodão", "Sorgo", "Cana-de-açucar", "Arroz", "Culturas de inverno", "Trigo", "Feijão", "Milho", "Soja"))) %>% 
+  filter(Culturas != "Pastagem")
+
+ggplot(Culturas, aes(x=Culturas, y=Perc, fill=Culturas)) + geom_bar(stat="identity", width = 0.7, color="black", sort=TRUE) + facet_wrap(~Regiao) + coord_flip() + 
+  theme_bw() +
+ # geom_text(aes(label = str_c(round(Perc), "%")),
+ #           position = position_stack(vjust = 1.1)) +
+  scale_fill_manual(values=c("#41EAD4", "#80ff00", "#ffe6e6", "#D4C1EC", "#FB6376", "#DECBB7", "#21468B", "#ED7D3A", "#FFFFFF", "#74ACDFFF", "#fed100", "#000000", "#009b3a", "#D91023")) +
+#  scale_color_material("teal") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="none", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Culturas mais plantadas",
+       caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + 
+  ggsave("Culturas.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+```{r}
+p <- ggplot(Culturas, aes(Culturas, y=Perc, fill=Culturas)) + geom_bar(stat="identity", width=0.5, color="black") + coord_flip() + 
+    scale_fill_manual(values=c("#41EAD4", "#80ff00", "#ffe6e6", "#D4C1EC", "#FB6376", "#DECBB7", "#21468B", "#ED7D3A", "#FFFFFF", "#74ACDFFF", "#fed100", "#000000", "#009b3a", "#D91023")) +
+  theme_bw() +
+   theme(axis.text=element_text(size=12, color="black"), plot.subtitle = element_text(hjust = 0.5),  legend.position="none",
+        axis.title=element_text(size=15, face="bold"), plot.title = element_text(size=15, face="bold", hjust = 0.5),
+        panel.background = element_rect(fill="white", color = "black"),
+        panel.grid.major = element_line(color = "white")) + #facet_wrap(~Region) + 
+    labs(title='Região: {closest_state}', y="% respondentes", x="", subtitle = "Culturas mais manejadas no Brasil", caption = "Fonte: Weed Techonology Journal") + ylim(0,100) + #annotation_custom(g, xmin=-Inf, xmax=95, ymin=90, ymax=98) +
+  transition_states(Regiao, transition_length = 3, state_length = 3) +
+  enter_fade() +
+  exit_shrink() +
+  ease_aes('sine-in-out')  
+
+anim <- animate(p)
+magick::image_write(anim, path="culturas.gif")
+```
+
+
+
+
+
+# Safras 
+
+
+```{r Safras, include=FALSE}
+Safras=read_csv("Safras.csv")
+
+Safras$Safras <-factor(Safras$Safras, levels=c("1", "2", "3"), labels=c("1", "2", "3"))
+
+Safras$Regiao <-factor(Safras$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=271)", "Norte (n=11)", "Nordeste (n=22)", "Centro-Oeste (n=61)", "Sudeste (n=99)", "Sul (n=119)"))
+```
+
+
+```{r Safras Figura}
+ggplot(Safras, aes(x="", y=Perc, fill=Safras)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  theme_bw() + coord_flip() +
+  scale_fill_manual(name="", values = c("#c5050c", "#dadfe1", "#282728")) + 
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Culturas em sucessão por ano", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") +
+  ggsave("Safras.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+# Irrigado
+
+```{r Irrigado}
+Irrigado=read_csv("Irrigado.csv")
+
+Irrigado$Irrigado <-factor(Irrigado$Irrigado, levels=c("Sim", "Parcialmente", "Nao"), labels=c("Sim", "Parcialmente", "Não"))
+
+Irrigado$Regiao <-factor(Irrigado$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=272)", "Norte (n=11)", "Nordeste (n=22)", "Centro-Oeste (n=63)", "Sudeste (n=99)", "Sul (n=119)"))
+```
+
+```{r Irrigado Figura}
+ggplot(Irrigado, aes(x="", y=Perc, fill=Irrigado)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  theme_bw() + coord_flip() +
+  scale_fill_manual(name="", values = c("#E41C38", "#FDF2D9", "#282728")) + 
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Cultivo irrigado", caption = "Fonte: Fonte: Oliveira et al. 10.1017/wet.2020.96") + ylim(0,100) +
+  ggsave("irrigado.png", units="in", width=9, height=6, dpi=600)
+```
+
+# Plantio direto
+
+
+```{r Plantio direto, include=FALSE}
+PDireto=read_csv("PlantioDireto.csv")
+
+PDireto$Pdireto <-factor(PDireto$Pdireto, levels=c("Sim", "Parcialmente", "Nao"), labels=c("Sim", "Parcialmente", "Não"))
+
+PDireto$Regiao <-factor(PDireto$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=273)", "Norte (n=11)", "Nordeste (n=22)", "Centro-Oeste (n=63)", "Sudeste (n=99)", "Sul (n=119)"))
+```
+
+```{r Plantio direto Figura}
+ggplot(PDireto, aes(x="", y=Perc, fill=Pdireto)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  theme_bw() + coord_flip() +
+  scale_fill_manual(name="", values = c("#00274C", "#FFCB05", "#FDF2D9")) + 
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Plantio direto", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + ylim(0,100) + 
+  ggsave("plantiodireto.png", units="in", width=9, height=6, dpi=600)
+```
+
+# Cobertura
+
+
+```{r Cobertura, include=FALSE}
+Cobertura=read_csv("Cobertura.csv")
+Cobertura$Cobertura <-factor(Cobertura$Cobertura, levels=c("Sim", "Nao"), labels=c("Sim",  "Não"))
+Cobertura$Regiao <-factor(Cobertura$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=273)", "Norte (n=11)", "Nordeste (n=22)", "Centro-Oeste (n=63)", "Sudeste (n=99)", "Sul (n=119)"))
+```
+
+```{r Cobertura Figura}
+ggplot(Cobertura, aes(x="", y=Perc, fill=Cobertura)) + geom_bar(stat="identity",  width=0.5, color="black") + facet_wrap(~Regiao) +
+theme_bw() + coord_flip() +
+  scale_fill_manual(name="", values = c("#862334", "#FBB93C")) + 
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Cultura de cobertura", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + ylim(0,100) + 
+  ggsave("cobertura.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+# Lavoura-pecuaria
+
+
+```{r Lavoura}
+Lavoura=read_csv("Lavoura.csv")
+Lavoura$Lavoura <-factor(Lavoura$Lavoura, levels=c("Sim", "Nao"), labels=c("Sim",  "Não"))
+Lavoura$Regiao <-factor(Lavoura$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=256)", "Norte (n=11)", "Nordeste (n=22)", "Centro-Oeste (n=57)", "Sudeste (n=93)", "Sul (n=114)"))
+```
+
+
+```{r Lavoura Figura}
+ggplot(Lavoura, aes(x="", y=Perc, fill=Lavoura)) + geom_bar(stat="identity",  width=0.5, color="black") + facet_wrap(~Regiao) +
+theme_bw() + coord_flip() +
+  scale_fill_manual(name="", values = c("#000000", "#FCD116")) + 
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Lavoura-pecuária", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + ylim(0,100) + 
+  ggsave("lavourapecuaria.png", units="in", width=9, height=6, dpi=200)
+```
+
+
+
+
+
+```{r include=FALSE}
+Data=read_csv("Plants.csv")
+
+Data$Regiao <-factor(Data$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil", "Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul"))
+
+Data$Species <-factor(Data$Species, levels=c("trapoeraba", "capim-pe-de-galinha", "capim colchao", "buva", "azevem", "capim massambara", "leiteiro",  "corda-de-viola", "Palmer", "caruru", "picao", "capim-amargoso", "capim-branco", "poaia-branca",    "tiririca", "arroz vermelho"),labels=c("trapoeraba", "capim-pé-de-galinha", "capim colchão", "buva", "azevém", "capim massambará", "leiteiro",  "corda-de-viola", "Palmer amaranth", "caruru", "picão", "capim-amargoso", "capim-branco", "poaia-branca","tiririca", "arroz vermelho"))
+```
+
+
+
+```{r}
+Data <- Data %>% 
+  mutate(Species = factor(Species, levels = c("Palmer amaranth", "capim-branco", "capim massambará", "caruru", "azevém", "poaia-branca", "capim colchão", "arroz vermelho", "leiteiro", "picão", "tiririca", "capim-pé-de-galinha", "trapoeraba", "corda-de-viola",  "capim-amargoso", "buva")))
+
+ggplot(Data) + aes(x=Species, y=Perc, fill=Species) + geom_bar(stat="identity", width = 0.7, color="black", sort=TRUE) + facet_wrap(~Regiao) + coord_flip() + #theme_economist_white() +
+  theme_bw() +
+    #annotate("text", x = 1, y = 95, label = c("n=256", "n=11", "n=22", "n=57", "n=93", "n=113"), size=3) +
+  #geom_text() +
+  scale_fill_manual(values=c("khaki1", "grey",  "red1", "purple","lightblue", "blue",  "turquoise1", "lightgreen", "palegoldenrod", "darkgreen", "pink",  "orange", "tomato4", "gold", "snow", "grey15")) +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="none", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Plantas daninhas mais problemáticas",
+       caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + 
+  ggsave("daninhas.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+```{r}
+z <- ggplot(Data, aes(Species, y=Perc, fill=Species)) + geom_bar(stat="identity", width=0.5, color="black") + coord_flip() + 
+    scale_fill_manual(values=c("khaki1", "grey",  "red1", "purple","lightblue", "blue",  "turquoise1", "lightgreen", "palegoldenrod", "darkgreen", "pink",  "orange", "tomato4", "gold", "snow", "grey15")) +
+  theme_bw() +
+   theme(axis.text=element_text(size=12, color="black"), plot.subtitle = element_text(hjust = 0.5),  legend.position="none",
+        axis.title=element_text(size=15, face="bold"), plot.title = element_text(size=15, face="bold", hjust = 0.5),
+        panel.background = element_rect(fill="white", color = "black"),
+        panel.grid.major = element_line(color = "white")) + #facet_wrap(~Region) + 
+  labs(title='Região: {closest_state}', y="% respondentes", x="", subtitle = "Plantas daninhas mais problemáticas no Brasil", caption = "Fonte: Weed Techonology Journal") + ylim(0,100) + #annotation_custom(g, xmin=-Inf, xmax=95, ymin=90, ymax=98) +
+  transition_states(Regiao, transition_length = 3, state_length = 3) +
+  enter_fade() +
+  exit_shrink() +
+  ease_aes('sine-in-out')  
+
+anim <- animate(z)
+magick::image_write(anim, path="daninhas.gif")
+```
+
+-------------------
+
+```{r}
+Herbicides=read_csv("Herbicides_pt.csv")
+
+Herbicides$Program <-factor(Herbicides$Program, levels=c("Dessecante pré plantio", "PRÉ-emergente", "PÓS-emergente", "Dessecante colheita"), labels=c("Dessecante pré plantio", "PRÉ-emergente", "PÓS-emergente", "Dessecante colheita"))
+```
+
+
+```{r}
+Herbicides <- Herbicides %>% 
+  select(SOA, Program, Crop_2, Value) %>% 
+  group_by(Program,  Crop_2) %>% 
+  mutate(total = sum(Value)) %>% 
+  mutate(Perc = round(Value / total, 3)*100)
+```
+
+```{r}
+ggplot(Herbicides, aes(x=Crop_2, y=Perc, fill=SOA)) + geom_bar(position="stack", stat="identity", width = 0.7, color = "black", size = 0.01) + facet_grid(~Program) + coord_flip() +
+   theme_bw() +  
+  scale_fill_manual(name="Mecanismo de ação", values = c("#FFCCC9", "#FFA500", "#34CDF9", "#FFFC9E", "#ECF4FF",  "#FFCE93", "#96FFFB", "#C0C0C0", "#9698ED", "#FD6864", "#32CB00", "#333333")) +
+  theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respostas", x="", title = "Programa de herbicidas",
+       caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + 
+  ggsave("programa.png", units="in", width=12, height=6, dpi=600)
+```
+
+```{r include=FALSE}
+Metodos=read_csv("Metodos.csv")
+
+Metodos$Regiao <-factor(Metodos$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=192)", "Norte (n=8)", "Nordeste (n=16)", "Centro-Oeste (n=43)", "Sudeste (n=66)", "Sul (n=87)"))
+
+Metodos$Tipo <-factor(Metodos$Tipo, levels=c("Biologico", "Cultural", "Fisico", "Mecanico", "Nenhum"), labels=c("Biológico", "Cultural", "Físico", "Mecânico", "Nenhum"))
+```
+
+
+
+```{r metodosfig Figura}
+ggplot(Metodos, aes(x=reorder(Tipo, Perc), y=Perc, fill=Tipo, label=Perc)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_bw() + 
+  scale_fill_brewer(name="Manejo", palette = "Set3") +
+  geom_label(fill="white") + theme_bw() +
+    theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="none", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Manejo alternativo a herbicidas", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + ylim(0,100) +
+  ggsave("Metodos.png", units="in", width=9, height=6, dpi=600)
+```
+
+```{r include=FALSE}
+Gres=read_csv("glyp_res_weed.csv")
+
+Gres$Resp <-factor(Gres$Resp, levels=c("Sim", "Não sabe", "Não"), labels=c("Sim", "Não sabe", "Não"))
+
+Gres$Regiao <-factor(Gres$Regiao, levels=c( "Brasil", "Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul"), labels=c("Brasil (n=258)", "Norte (n=11)", "Nordeste (n=22)", "Centro-Oeste (n=57)", "Sudeste (n=94)", "Sul (n=114)"))
+```
+
+
+```{r }
+ggplot(Gres, aes(x="", y=Perc, fill=Resp)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) + theme_bw() + coord_flip() +
+  scale_fill_manual(name="", values = c("#FF6347", "#fdff00", "#32CD32")) + 
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Maneja planta daninha resistente a glifosato", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") +
+  ggsave("GRyn.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+```{r RGly}
+RGly=read_csv("RGly.csv")
+RGly$Species <-factor(RGly$Species, levels=c("azevem", "buva", "capim-amargoso", "capim-branco","capim-pe-de-galinha", "Palmer"), labels=c("azevém", "buva", "capim-amargoso", "capim-branco", "capim-pé-de-galinha", "Palmer amaranth"))
+
+RGly$Regiao <-factor(RGly$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=190)", "Norte (n=8)", "Nordeste (n=14)", "Centro-Oeste (n=45)", "Sudeste (n=67)", "Sul (n=91)"))
+```
+
+```{r speciesfig Figura}
+ggplot(RGly, aes(x=reorder(Species, Perc), y=Perc, fill=Species, label=Perc)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() +
+  scale_fill_brewer(name="Plantas", palette = "Set3") +
+   geom_label(fill="white") + theme_bw() +
+    theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Plantas daninhas resistentes ao glifosato", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + ylim(0,100) +
+  ggsave("GlyR.png", units="in", width=9, height=6, dpi=800)
+```
+
+
+
+```{r include=FALSE}
+Hres=read_csv("herb_resis_weed.csv")
+
+Hres$Resp <-factor(Hres$Resp, levels=c("Sim", "Não sabe", "Não"), labels=c("Sim", "Não sabe", "Não"))
+
+Hres$Regiao <-factor(Hres$Regiao, levels=c( "Brasil", "Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul"), labels=c("Brasil (n=257)", "Norte (n=11)", "Nordeste (n=22)", "Centro-Oeste (n=57)", "Sudeste (n=94)", "Sul (n=114)"))
+```
+
+
+```{r }
+ggplot(Hres, aes(x="", y=Perc, fill=Resp)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) + theme_bw() + coord_flip() +
+  scale_fill_manual(name="", values = c("#FF6347", "#fdff00", "#32CD32")) + 
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Maneja planta daninha resistente a outros herbicidas", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") +
+  ggsave("HRyn.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+```{r include=FALSE}
+Resistencia=read_csv("Resistencia.csv")
+
+Resistencia$Regiao <-factor(Resistencia$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=97)", "Norte (n=4)", "Nordeste (n=8)", "Centro-Oeste (n=25)", "Sudeste (n=26)", "Sul (n=52)"))
+
+Resistencia$Herbicida <-factor(Resistencia$Herbicida, levels=c("Inibidores da ACCase", "Inibidores da ALS", "Inibidores da divisao celular ou VLCFA", "Inibidores de fotossistema I", "Inibidores de fotossistema II", "Inibidores da PPO", "Inibidores da sintese de carotenoides", "Mimetizadores da auxina"), labels=c("Inibidores da ACCase", "Inibidores da ALS", "Inibidores da AGCML", "Desvio de elétrons do FSI", "Inibidores do FSII", "Inibidores da PPO", "Inibidores da DOXP sintase", "Mimetizadores da auxina"))
+```
+
+
+
+```{r Resistfig Figura}
+ggplot(Resistencia, aes(x=reorder(Herbicida,Perc), y=Perc, fill=Herbicida, label=Perc)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + 
+  scale_fill_manual(name="Mecanismo de ação", values = c("#FFA500", "#FFFC9E", "#34CDF9", "#FFCCC9", "#32CB00", "#FD6864", "#ECF4FF", "#333333")) +
+  geom_label(fill="white") + theme_bw() +
+    theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="none", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Resistência a herbicidas", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + ylim(0,100) +
+  ggsave("Resistencia.png", units="in", width=12, height=7, dpi=800)
+```
+
+
+
+
+
+
+
+```{r Mimetizadores da auxina, include=FALSE}
+Mimeti=read_csv("Mimetizadores.csv")
+Mimeti$Resposta <-factor(Mimeti$Resposta, levels=c("Sim", "Parcialmente", "Nao"), labels=c("Sim", "Parcialmente", "Nao"))
+Mimeti$Regiao <-factor(Mimeti$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=154)", "Norte (n=9)", "Nordeste (n=13)", "Centro (n=42)", "Sudeste (n=44)", "Sul (n=74)"))
+```
+
+```{r Mimeti Figura}
+ggplot(Mimeti, aes(x="", y=Perc, fill=Resposta)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) + theme_bw() + coord_flip() +
+  scale_fill_manual(name="", values = c("#003366", "#ffd125", "#E84A27")) + 
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Pretende adotar culturas Enlist e Xtend", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") +
+  ggsave("mimetiza.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+# Aplicador
+
+
+```{r include=FALSE}
+Aplicador=read_csv("Aplicador.csv")
+
+Aplicador$Regiao <-factor(Aplicador$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=202)", "Norte (n=9)", "Nordeste (n=17)", "Centro-Oeste (n=44)", "Sudeste (n=70)", "Sul (n=91)"))
+
+Aplicador$Ocupacao <-factor(Aplicador$Ocupacao, levels=c("Agronomo", "Aplicador especialista", "Consultor", "Cooperativa", "Funcionario da fazenda",  "Produtor rural", "Tecnico agricola", "Outros"), labels=c("Agrônomo", "Aplicador especialista", "Consultor", "Cooperativa", "Funcionário da fazenda",  "Produtor rural", "Técnico agrícola", "Outros"))
+```
+
+
+
+```{r aplicadorfig Figura}
+ggplot(Aplicador, aes(x=Ocupacao, y=Perc, fill=Ocupacao, label=Perc)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_bw() +
+  scale_fill_brewer(palette = "Set3") +
+  geom_label(fill="white") +
+  theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="none", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Responsável pela aplicação de herbicidas", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + ylim(0,100) +
+  ggsave("aplicador.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+```{r }
+Train=read_csv("treinamento.csv")
+Train$Resp <-factor(Train$Resp, levels=c("Sim", "Não sabe", "Não"), labels=c("Sim", "Não sabe",  "Não"))
+Train$Regiao <-factor(Train$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul"), labels=c("Brasil (n=202)", "Norte (n=9)", "Nordeste (n=17)", "Centro-Oeste (n=44)", "Sudeste (n=70)", "Sul (n=91)"))
+```
+
+
+```{r Train Figura}
+ggplot(Train, aes(x="", y=Perc, fill=Resp)) + geom_bar(stat="identity",  width=0.5, color="black") + facet_wrap(~Regiao) +
+theme_bw() + coord_flip() +
+  scale_fill_manual(name="", values = c("#4E2A84", "#990000", "#EDEBEB")) + 
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Treinamento com o aplicador", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + ylim(0,100) + 
+  ggsave("treinamento.png", units="in", width=9, height=6, dpi=200)
+```
+
+
+
+
+
+
+
+```{r include=FALSE}
+Problema=read_csv("Problema.csv")
+
+Problema$Regiao <-factor(Problema$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brasil (n=198)", "Norte (n=8)", "Nordeste (n=16)", "Centro-Oeste (n=90)", "Sudeste (n=68)", "Sul (n=90)"))
+
+Problema$Problema <-factor(Problema$Problema, levels=c("Clima", "Custos", "Herbicidas seletivos", "Legislacao", "Mao-de-obra", "Poucas opcoes de herbicidas", "Resistencia"), labels=c("Clima", "Custo", "Falta de herbicidas seletivos", "Legislação", "Mão-de-obra", "Pouca opção de herbicida", "Resistência de planta daninha"))
+```
+
+
+
+```{r Problemafig Figura}
+ggplot(Problema, aes(x=reorder(Problema,Perc), y=Perc, fill=Problema, label=Perc)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_bw() +
+  scale_fill_brewer(palette = "Set3") +
+  geom_label(fill="white") +
+  theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10,  color="black"), plot.title = element_text(size=18, face="bold", hjust = 0.0, color="black"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="none", panel.grid = element_blank()) + 
+  labs(y="% respondentes", x="", title = "Desafios no manejo de plantas daninhas", caption = "Fonte: Oliveira et al. 10.1017/wet.2020.96") + ylim(0,100) 
+  ggsave("Problema.png", units="in", width=9, height=6, dpi=600)
+```

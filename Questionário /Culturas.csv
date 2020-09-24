@@ -1,0 +1,85 @@
+Culturas,Regiao,Perc
+Algodao,Sul,3
+Arroz,Sul,38
+Cafe ,Sul,0
+Cana-de-acuca,Sul,8
+Citrus,Sul,13
+Eucalipto,Sul,5
+HF,Sul,13
+Milho,Sul,29
+"Culturas de inverno (aveia, cevada, triticale)",Sul,40
+Pastagem,Sul,3
+Soja,Sul,83
+Sorgo,Sul,8
+Trigo,Sul,40
+Algodao,Sudeste,14
+Arroz,Sudeste,7
+Cafe ,Sudeste,28
+Cana-de-acuca,Sudeste,36
+Citrus,Sudeste,10
+Eucalipto,Sudeste,12
+HF,Sudeste,15
+Milho,Sudeste,33
+"Culturas de inverno (aveia, cevada, triticale)",Sudeste,11
+Pastagem,Sudeste,4
+Soja,Sudeste,56
+Sorgo,Sudeste,21
+Trigo,Sudeste,17
+Algodao,Centro,29
+Arroz,Centro,14
+Cafe ,Centro,10
+Cana-de-acuca,Centro,16
+Citrus,Centro,5
+Eucalipto,Centro,6
+HF,Centro,3
+Milho,Centro,38
+"Culturas de inverno (aveia, cevada, triticale)",Centro,8
+Pastagem,Centro,11
+Soja,Centro,83
+Sorgo,Centro,30
+Trigo,Centro,10
+Algodao,Nordeste,41
+Arroz,Nordeste,32
+Cafe ,Nordeste,14
+Cana-de-acuca,Nordeste,18
+Citrus,Nordeste,18
+Eucalipto,Nordeste,14
+HF,Nordeste,14
+Milho,Nordeste,55
+"Culturas de inverno (aveia, cevada, triticale)",Nordeste,14
+Pastagem,Nordeste,9
+Soja,Nordeste,68
+Sorgo,Nordeste,32
+Trigo,Nordeste,18
+Algodao,Norte,55
+Arroz,Norte,55
+Cafe ,Norte,27
+Cana-de-acuca,Norte,45
+Citrus,Norte,27
+Eucalipto,Norte,27
+HF,Norte,9
+Milho,Norte,45
+"Culturas de inverno (aveia, cevada, triticale)",Norte,9
+Pastagem,Norte,9
+Soja,Norte,100
+Sorgo,Norte,45
+Trigo,Norte,0
+Algodao,Brasil,12
+Arroz,Brasil,22
+Cafe ,Brasil,11
+Cana-de-acuca,Brasil,19
+Citrus,Brasil,11
+Eucalipto,Brasil,8
+HF,Brasil,11
+Milho,Brasil,66
+"Culturas de inverno (aveia, cevada, triticale)",Brasil,23
+Pastagem,Brasil,4
+Soja,Brasil,73
+Sorgo,Brasil,15
+Trigo,Brasil,24
+Feijao,Brasil,32
+Feijao,Norte,45
+Feijao,Nordeste,55
+Feijao,Centro,38
+Feijao,Sudeste,33
+Feijao,Sul,29

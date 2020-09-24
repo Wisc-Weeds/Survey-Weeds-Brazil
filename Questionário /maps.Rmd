@@ -1,0 +1,82 @@
+---
+title: "Maps"
+author: "Maxwel Coura Oliveira"
+date: "4/13/2019"
+output: pdf_document
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+library(scales)
+library(ggthemes)
+library(usmap)
+library(ggmap)
+library(ggrepel)
+library(maps)
+library(grid)
+library(mapdata)
+library(maptools)
+library(stringr)
+library(dplyr)
+library(ggsn)
+library(choroplethr)
+library(brazilmaps)
+```
+
+
+
+```{r}
+map <- get_brmap(geo = c("Brazil","Region","State","MesoRegion","MicroRegion","City"),
+                     geo.filter = list(Region = 5),
+                     class = c("sf", "SpatialPolygonsDataFrame", "data.frame"))
+```
+
+
+```{r}
+Region <- get_brmap(geo = c("State"),
+                    geo.filter = list(Region = c(1,2,3,4,5), fill="purple"),
+                     class = "SpatialPolygonsDataFrame")
+plot_brmap(Region) + geom_polygon(color = "red")
+```
+
+
+
+
+```{r}
+Region <- get_brmap(geo = "Region",
+                     geo.filter = list(Region = 5),
+                     class = "sf")
+plot_brmap(Region) + theme_grey() + labs(y="Latitude", x="Longitude") +
+  #north(Region, location = 'topright', symbol = 16, anchor = c(x = -40, y = 0)) +
+  #scalebar(data=Region, dist = 1000, dd2km = T, model = 'International', location = "topleft") + 
+  annotate("text", x = -60, y = -3, label = "North", size=4) +
+  annotate("text", x = -41, y = -8, label = "Northeast", size=4) +
+  annotate("text", x = -54, y = -15, label = "Midwest", size=4) +
+  annotate("text", x = -45, y = -20, label = "Southeast", size=4) +
+  annotate("text", x = -52, y = -28, label = "South", size=4) +
+  theme(axis.title = element_text(), axis.ticks = element_blank(), axis.text = element_text()) +
+  ggsave("Map.tiff", width = 6, height = 6, dpi=600)
+```
+
+```{r}
+plot_brmap(map)
+```
+
+
+
+```{r}
+ ## Retrieving the map from the State of Rio de Janeiro
+    rio_map <- get_brmap(geo = "State",
+                         geo.filter = list(State = 33),
+                         class = "sf")
+    plot_brmap(rio_map)
+    ## Obtaining the municipalities maps from Midwest Region
+    cities_map <- get_brmap(geo = "City",
+                            geo.filter = list(Region = 5),
+                            class = "sf")
+    plot_brmap(cities_map)
+```
+

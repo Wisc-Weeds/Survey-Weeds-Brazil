@@ -1,0 +1,545 @@
+---
+title: "Data"
+author: "Maxwel Coura Oliveira"
+date: "9/6/2018"
+output: html_document
+---
+
+```{r include=FALSE}
+#library(brazilmaps)
+library(ggmap)
+library(tidyverse)
+library(ggplot2)
+library(ggmap)
+library(maps)
+library(grid)
+library(mapdata)
+library(maptools)
+library(stringr)
+library(dplyr)
+library(ggsn)
+library(ggthemes)
+library(ggridges)
+```
+
+
+```{r}
+Herbicides=read_csv("Herbicides.csv")
+
+Herbicides$Program <-factor(Herbicides$Program, levels=c("Burndown", "PRE-emergence", "POST-emergence", "Harvest aid"), labels=c("Burndown", "PRE", "POST", "Harvest aid"))
+```
+
+
+```{r}
+Herbicides <- Herbicides %>% 
+  select(SOA, Program, Crop_2, Value) %>% 
+  group_by(Program,  Crop_2) %>% 
+  mutate(total = sum(Value)) %>% 
+  mutate(Perc = round(Value / total, 3)*100)
+```
+
+```{r}
+ggplot(Herbicides, aes(x=Crop_2, y=Perc, fill=SOA)) + geom_bar(position="stack", stat="identity", width = 0.7, color = "#333333", size = 0.01) + facet_grid(~Program) + coord_flip() +
+   labs(y="% respondents", x="", title = "", caption = "") + theme_bw() + #scale_fill_brewer(name="Sites of action", palette = "Paired") +    
+  scale_fill_manual(name="Herbicide sites of action", values = c("#FFA500", "#FFFC9E", "#ECF4FF", "#FFCE93", "#C0C0C0", "#9698ED", "#34CDF9", "#96FFFB", "#FD6864", "#FFCCC9", "#32CB00", "#333333")) +
+  theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0.0, color="red"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="bottom", panel.grid = element_blank()) + 
+  labs(y="% answers", x="", title = "", caption = "") + #ylim(0,100) +
+  ggsave("Figure 3.pdf", units="in", width=12, height=6, dpi=600)
+```
+
+
+
+```{r}
+ggplot(Herbicides, aes(x=Crop, y=Value, fill=SOA)) + geom_bar(position="stack", stat="identity", width = 0.5, color="black") + facet_grid(~Program) + coord_flip() +
+  #theme_wsj(base_size = 12, color = "grey", base_family = "sans", title_family = "mono") + 
+  labs(y="% respondents", x="", title = "", caption = "") + theme_bw() + scale_fill_brewer(palette = "Paired") +    theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0.4, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=13, face="bold"), legend.position="none", panel.grid = element_blank()) + 
+  labs(y="% respondents", x="", title = "", caption = "") + ylim(0,100) +
+  ggsave("SOA.pdf", units="in", width=12, height=6, dpi=600)
+```
+
+
+```{r}
+ggplot(Herbicides, aes(x=Crop_2, y=share, fill=SOA)) + geom_bar(position="stack", stat="identity", width = 0.5, color="black") + facet_grid(~Program) + coord_flip()  + 
+  #theme_wsj(base_size = 12, color = "grey", base_family = "sans", title_family = "mono") + 
+  labs(y="% respondents", x="", title = "", caption = "") + theme_bw() + scale_fill_brewer(palette = "Paired") +    theme(axis.text.y =element_text(size=15, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0.4, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=13, face="bold"), legend.position="none", panel.grid = element_blank()) + 
+  labs(y="% respondents", x="", title = "", caption = "") + ylim(0,100) +
+  ggsave("SOAshare.pdf", units="in", width=12, height=6, dpi=600)
+```
+
+
+
+
+
+
+
+```{r include=FALSE}
+Regiao=read_csv("regiao.csv")
+
+
+Regiao$Regiao <-factor(Regiao$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul"))
+```
+
+```{r Regiao Figura}
+ggplot(Regiao, aes(x=Regiao, y=Perc, fill=Regiao, label=Perc)) + geom_bar(stat="identity", width = 0.7, color="black", sort=TRUE) + coord_flip() + #theme_economist_white() +
+  #theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  #title_family = "mono") + 
+  theme_bw() +
+  geom_label(fill="white", size=5) +
+  scale_fill_brewer(palette="Set3") +
+   theme(axis.text=element_text(size=12, color="black"), plot.subtitle = element_text(hjust = 0.5),  legend.position="none",
+        axis.title=element_text(size=15, face="bold"), plot.title = element_text(size=15, face="bold", hjust = 0.5),
+        panel.background = element_rect(fill="white", color = "black"),
+        panel.grid.major = element_line(color = "white")) + 
+  labs(y="% respondentes", x="", title = "Respondentes por região") + ylim(0,60) +
+  ggsave("Regiao.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+```{r include=FALSE}
+Ocupacao=read_csv("ocupacao.csv")
+
+
+Ocupacao$Ocupacao <-factor(Ocupacao$Ocupacao, levels=c("Agronomo", "Comercial (Gerencia/ATC/RTV/MKT)", "Consultor", "Estudante", "Extensionista agricola", "Funcionario da propriedade rural", "Pesquisador em empresa", "Pesquisador publico", "Professor", "Produtor rural", "Tecnico agricola"), labels=c("Agrônomo", "Comercial (Gerência/ATC/RTV/MKT)", "Consultor", "Estudante", "Extensionista agrícola", "Funcionário da propriedade rural", "Pesquisador em empresa", "Pesquisador público", "Professor", "Produtor rural", "Técnico agricola"))
+
+
+Ocupacao$Regiao <-factor(Ocupacao$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+```
+
+```{r Ocupacao Figura}
+ggplot(Ocupacao, aes(x=Ocupacao, y=Perc, fill=Ocupacao)) + geom_bar(stat="identity", width = 0.7, color="black", sort=TRUE) + facet_wrap(~Regiao) + coord_flip() + #theme_economist_white() +
+  #theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  #title_family = "mono") + 
+  theme_bw() +
+  scale_fill_brewer(palette="Set3") +
+   theme(axis.text=element_text(size=12, color="black"), plot.subtitle = element_text(hjust = 0.5),  legend.position="none",
+        axis.title=element_text(size=15, face="bold"), plot.title = element_text(size=15, face="bold", hjust = 0.5),
+        panel.background = element_rect(fill="white", color = "black"),
+        panel.grid.major = element_line(color = "white")) + 
+  labs(y="% respondentes", x="", title = "Ocupação de respondentes por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Ocupacao.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+```{r Names Culturas, include=FALSE}
+Culturas$Culturas <-factor(Culturas$Culturas, levels=c("Algodao", "Arroz", "Cafe", "Cana-de-acuca", "Citrus", "Culturas de inverno (aveia, cevada, triticale)", "Eucalipto", "HF", "Milho", "Pastagem", "Soja", "Sorgo", "Trigo"), labels=c("Algodão", "Arroz", "Café", "Cana-de-açúcar", "Citrus", "Culturas de inverno", "Eucalipto", "HF", "Milho", "Pastagem", "Soja", "Sorgo", "Trigo"))
+
+Culturas$Regiao <-factor(Culturas$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+```
+
+```{r Names Culturas, include=FALSE}
+Culturas$Culturas <-factor(Culturas$Culturas, levels=c("Citrus", "Cafe", "Milho", "Algodao", "Eucalipto", "Pastagem", "Arroz", "Sorgo",  "Soja", "Cana-de-acuca", "HF", "Trigo", "Culturas de inverno (aveia, cevada, triticale)"), labels=c("Citrus", "Coffee",  "Corn", "Cotton", "Eucaliptus", "Forages", "Rice", "Sorghum", "Soybean", "Sugarcane", "Vegetables", "Wheat", "Winter crops"))
+
+Culturas$Regiao <-factor(Culturas$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+```
+
+
+```{r Culturas Figura}
+ggplot(Culturas, aes(x=Culturas, y=Perc, fill=Culturas)) + geom_bar(stat="identity", width = 0.7, color="black", sort=TRUE) + facet_wrap(~Regiao) + coord_flip() + #theme_economist_white() +
+  theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_manual(values=c("lightblue", "blue", "turquoise1", "lightgreen", "greenyellow", "darkgreen", "pink", "red1", "orange", "tomato4", "gold", "snow", "purple")) +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0.4, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondentes", x="", title = "Culturas por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Culturas.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r Safras, include=FALSE}
+Safras=read_csv("Safras.csv")
+```
+
+```{r Names Safras, include=FALSE}
+Safras$Safras <-factor(Safras$Safras, levels=c("1", "2", "3"), labels=c("1", "2", "3"))
+```
+
+```{r Names Regiao1, include=FALSE}
+Safras$Regiao <-factor(Safras$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+```
+
+
+```{r Safras Figura}
+ggplot(Safras, aes(x="", y=Perc, fill=Safras)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  scale_fill_manual(values = c("red", "blue", "darkgreen")) + #coord_polar(theta = "y", start = pi / 3) + 
+  theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text.y =element_text(size=14, color="black"), axis.text.x =element_text(size=14, color="black"), plot.subtitle = element_text(hjust = 0.5),  axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="Número de safras", palette="Greens") +  
+  labs(y="% respondentes", x="", title = "Safras em 1 ano por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Safras.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+
+```{r Irrigado}
+Irrigado=read_csv("Irrigado.csv")
+```
+
+```{r Names , include=FALSE}
+Irrigado$Irrigado <-factor(Irrigado$Irrigado, levels=c("Sim", "Parcialmente", "Nao"), labels=c("Sim", "Parcialmente", "Não"))
+```
+
+```{r Names Regiao2, include=FALSE}
+Irrigado$Regiao <-factor(Irrigado$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+```
+
+```{r Irrigado Figura}
+ggplot(Irrigado, aes(x="", y=Perc, fill=Irrigado)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  scale_fill_manual(values = c("red", "blue", "darkgreen")) + #coord_polar(theta = "y", start = pi / 3) + 
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text.y =element_text(size=14, color="black"), axis.text.x =element_text(size=14, color="black"), plot.subtitle = element_text(hjust = 0.5),  axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="Irrigado", palette="Greens") +  
+  labs(y="% respondentes", x="", title = "Cultivo irrigado por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Cultivo irrigado.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+
+
+
+```{r Plantio direto, include=FALSE}
+PDireto=read_csv("PlantioDireto.csv")
+```
+
+```{r Names Plantio direto, include=FALSE}
+PDireto$Pdireto <-factor(PDireto$Pdireto, levels=c("Sim", "Parcialmente", "Nao"), labels=c("Sim", "Parcialmente", "Não"))
+```
+
+```{r Names Regiao2, include=FALSE}
+PDireto$Regiao <-factor(PDireto$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+```
+
+```{r Plantio direto Figura}
+ggplot(PDireto, aes(x="", y=Perc, fill=Pdireto)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  scale_fill_manual(values = c("red", "blue", "darkgreen")) + #coord_polar(theta = "y", start = pi / 3) + 
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text.y =element_text(size=14, color="black"), axis.text.x =element_text(size=14, color="black"), plot.subtitle = element_text(hjust = 0.5),  axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="Plantio direto", palette="Greens") +  
+  labs(y="% respondentes", x="", title = "Plantio direto por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Plantio Direto.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+```{r Cobertura, include=FALSE}
+Cobertura=read_csv("Cobertura.csv")
+Cobertura$Cobertura <-factor(Cobertura$Cobertura, levels=c("Sim", "Nao"), labels=c("Sim",  "Não"))
+Cobertura$Regiao <-factor(Cobertura$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+```
+
+```{r Cobertura Figura}
+ggplot(Cobertura, aes(x="", y=Perc, fill=Cobertura)) + geom_bar(stat="identity",  width=0.5, color="black") + facet_wrap(~Regiao) +
+  coord_polar(theta = "y", start = pi / 3) + 
+   theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+ # geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text =element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=15, face="bold", vjust=-3), axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="Cobertura verde", palette="Greens") +  
+  labs(y="% respondentes", x="", title = "Cobertura verde por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Cobertura verde.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+```{r Lavoura}
+Lavoura=read_csv("Lavoura.csv")
+Lavoura$Lavoura <-factor(Lavoura$Lavoura, levels=c("Sim", "Nao"), labels=c("Sim",  "Não"))
+Lavoura$Regiao <-factor(Lavoura$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+```
+
+
+```{r Lavoura Figura}
+ggplot(Lavoura, aes(x="", y=Perc, fill=Lavoura)) + geom_bar(stat="identity",  width=0.5, color="black") + facet_wrap(~Regiao) +
+  coord_polar(theta = "y", start = pi / 3) + 
+   theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+ # geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text =element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=15, face="bold", vjust=-3), axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="Lavoura pecuária", palette="Greens") +  
+  labs(y="% respondentes", x="", title = "Lavoura pecuária por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Lavourapecuaria.tiff", units="in", width=12, height=6, dpi=200)
+```
+
+
+
+```{r Mimetizadores da auxina, include=FALSE}
+Mimeti=read_csv("Mimetizadores.csv")
+Mimeti$Resposta <-factor(Mimeti$Resposta, levels=c("Sim", "Parcialmente", "Nao"), labels=c("Yes", "Not sure", "No"))
+Mimeti$Regiao <-factor(Mimeti$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brazil (n=154)", "North (n=9)", "Northeast (n=13)", "Midwest (n=42)", "Southeast (n=44)", "South (n=74)"))
+```
+
+```{r Mimeti Figura}
+ggplot(Mimeti, aes(x="", y=Perc, fill=Resposta)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  scale_fill_manual(values = c("red", "blue", "darkgreen")) + #coord_polar(theta = "y", start = pi / 3) + 
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.3), size=4) +
+   theme_bw() + #scale_color_wsj() +
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text.y =element_text(size=14, color="black"), axis.text.x =element_text(size=14, color="black"), plot.subtitle = element_text(hjust = 0.5),  axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="Intends to adopt?", palette="Greens") +  
+  labs(y="% respondents", x="", title = "", caption = "") + ylim(0,100) +
+  ggsave("mimetiza.pdf", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+```{r RGly}
+RGly=read_csv("RGly.csv")
+RGly$Species <-factor(RGly$Species, levels=c("azevem", "buva", "capim-amargoso", "capim-branco","capim-pe-de-galinha", "Palmer"), labels=c("azevém", "buva", "capim-amargoso", "capim-branco", "capim-pé-de-galinha", "Palmer amaranth"))
+RGly$Regiao <-factor(RGly$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+```
+
+```{r speciesfig Figura}
+ggplot(RGly, aes(x=Species, y=Perc, fill=Species)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 2, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondentes", x="", title = "Plantas daninhas resistente ao glyphosate por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("GlyR.tiff", units="in", width=9, height=6, dpi=800)
+```
+
+
+
+
+
+
+```{r include=FALSE}
+Data=read_csv("Plants.csv")
+
+Data$Regiao <-factor(Data$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+
+Data$Species <-factor(Data$Species, levels=c("arroz vermelho", "azevem", "buva", "capim-amargoso", "Capim-arroz", "capim-branco", "capim colchao", "capim massambara", "capim-pe-de-galinha", "caruru", "corda-de-viola", "leiteiro", "Palmer", "picao", "poaia-branca", "tiririca", "trapoeraba"), labels=c("arroz vermelho", "azevém", "buva", "capim amargoso", "capim arroz", "capim-branco", "capim colchão", "capim-massambará", "capim pé-de-galinha", "caruru", "corda-de-viola", "leiteiro", "Palmer amaranth", "picão", "poaia-branca", "tiririca", "trapoeraba"))
+```
+
+
+
+```{r}
+ggplot(Data, aes(x=Species, y=Perc, fill=Species)) + geom_bar(stat="identity", width = 0.7, color="black", sort=TRUE) + facet_wrap(~Regiao) + coord_flip() + #theme_economist_white() +
+  theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+  scale_fill_manual(values=c("khaki1", "grey",  "red1", "purple","lightblue", "deepskyblue", "blue", "turquoise1", "lightgreen", "greenyellow", "darkgreen", "pink",  "orange", "tomato4", "gold", "snow", "cornflowerblue")) +
+   theme(axis.text.y =element_text(size=9, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = -1.0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondentes", x="", title = "Plantas daninhas mais problemáticas por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Plantas daninhas problematicas.tiff", units="in", width=9, height=6, dpi=800)
+```
+
+
+
+
+```{r include=FALSE}
+Resistencia=read_csv("Resistencia.csv")
+```
+
+
+```{r Names, include=FALSE}
+Resistencia$Regiao <-factor(Resistencia$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+
+Resistencia$Herbicida <-factor(Resistencia$Herbicida, levels=c("Inibidores da ACCase", "Inibidores da ALS", "Inibidores da divisao celular ou VLCFA", "Inibidores de fotossistema I", "Inibidores de fotossistema II", "Inibidores da PPO", "Inibidores da sintese de carotenoides", "Mimetizadores da auxina"), labels=c("Inibidores da ACCase", "Inibidores da ALS", "Inibidores da divisão celular ou VLCFA", "Inibidores de fotossistema I", "Inibidores de fotossistema II", "Inibidores da PPO", "Inibidores da síntese de carotenoides", "Mimetizadores da auxina"))
+```
+
+
+
+```{r Resistfig Figura}
+ggplot(Resistencia, aes(x=Herbicida, y=Perc, fill=Herbicida)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=15, hjust = 1.0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondentes", x="", title = "Plantas daninhas resistente a herbicidas (exceto EPSPS) por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Resistencia.tiff", units="in", width=9, height=6, dpi=800)
+```
+
+
+
+
+```{r include=FALSE}
+Aplicador=read_csv("Aplicador.csv")
+```
+
+
+```{r Names, include=FALSE}
+Aplicador$Regiao <-factor(Aplicador$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+
+Aplicador$Ocupacao <-factor(Aplicador$Ocupacao, levels=c("Agronomo", "Aplicador especialista", "Consultor", "Cooperativa", "Funcionario da fazenda",  "Produtor rural", "Tecnico agricola", "Outros"), labels=c("Agrônomo", "Aplicador especialista", "Consultor", "Cooperativa", "Funcionário da fazenda",  "Produtor rural", "Técnico agrícola", "Outros"))
+```
+
+
+
+```{r aplicadorfig Figura}
+ggplot(Aplicador, aes(x=Ocupacao, y=Perc, fill=Ocupacao)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 1.0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondentes", x="", title = "Responsável pela aplicação de herbicidas por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Aplicador.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+```{r include=FALSE}
+Satisfacao=read_csv("Satisfacao.csv")
+```
+
+
+```{r Names, include=FALSE}
+Satisfacao$Regiao <-factor(Satisfacao$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+
+Satisfacao$Species <-factor(Satisfacao$Species , levels=c("Daninha", "Insetos", "Doencas"), labels=c("Planta daninha", "Insetos", "Doenças"))
+
+Satisfacao$Nivel <-factor(Satisfacao$Nivel, levels=c("Baixo", "Satisfatorio", "Excelente"), labels=c("Baixo", "Satisfatório", "Excelente"))
+```
+
+
+
+```{r satisfacaofig Figura}
+ggplot(Satisfacao, aes(x=Nivel, y=Perc, fill=Nivel)) + geom_bar(stat="identity", width = 0.5, color="black") + facet_wrap(Species~Regiao, ncol=6) + coord_flip() + 
+  scale_fill_manual(values=c("red", "blue", "red", "red", "red", "blue")) +
+   theme(axis.text.y =element_text(size=13, color="black"), axis.text.x =element_text(size=12, color="black"), plot.subtitle = element_text(hjust = 0.5),  axis.title=element_text(size=15, face="bold"), plot.title = element_text(size=15, face="bold", hjust = 0.5), strip.text.x = element_text(size=12, face="bold"),
+        panel.background = element_rect(fill="white", color = "black"), legend.position = "none",
+        panel.grid.major = element_line(color = "white")) + scale_fill_brewer(palette="Paired") +
+  labs(y="% respondentes", x="", subtitle = "", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Satisfacao.tiff", units="in", width=13, height=7, dpi=800)
+```
+
+
+
+
+
+
+
+```{r include=FALSE}
+Info=read_csv("Informacao.csv")
+```
+
+
+```{r Names, include=FALSE}
+Info$Regiao <-factor(Info$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+
+Info$Local <-factor(Info$Local, levels=c("Embrapa", "Empresa de agroquimicos", "Empresa de consultoria", "Entidades estaduais de pesquisa e extensao", "Universidade"), labels=c("Embrapa", "Empresa de agroquímicos", "Consultoria", "Instituto estadual de pesquisa/extensão", "Universidade"))
+```
+
+
+
+```{r Infofig Figura}
+ggplot(Info, aes(x=Local, y=Perc, fill=Local)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = -1.0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondentes", x="", title = "Fonte de informação por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Info.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+```{r include=FALSE}
+Problema=read_csv("Problema.csv")
+```
+
+
+```{r Names, include=FALSE}
+Problema$Regiao <-factor(Problema$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+
+Problema$Problema <-factor(Problema$Problema, levels=c("Clima", "Custos", "Herbicidas seletivos", "Legislacao", "Mao-de-obra", "Poucas opcoes de herbicidas", "Resistencia"), labels=c("Clima", "Custo", "Falta de herbicidas seletivo", "Legislação", "Mão-de-obra", "Pouca opção de herbicida", "Resistência de planta daninha"))
+```
+
+
+
+```{r Problemafig Figura}
+ggplot(Problema, aes(x=Problema, y=Perc, fill=Problema)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondentes", x="", title = "Principais problemas por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Problema.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+```{r include=FALSE}
+Metodos=read_csv("Metodos.csv")
+```
+
+
+```{r Names, include=FALSE}
+Metodos$Regiao <-factor(Metodos$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+
+Metodos$Tipo <-factor(Metodos$Tipo, levels=c("Biologico", "Cultural", "Fisico", "Mecanico", "Nenhum"), labels=c("Biológico", "Cultural", "Físico", "Mecânico", "Nenhum"))
+```
+
+
+
+```{r metodosfig Figura}
+ggplot(Metodos, aes(x=Tipo, y=Perc, fill=Tipo)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=15, hjust = 0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondentes", x="", title = "Métodos alternativos de controle de planta daninha por região", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Metodos.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

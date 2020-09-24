@@ -1,0 +1,49 @@
+Ocupacao,Regiao,Perc
+Agronomo,Sul,19
+Tecnico agricola,Sul,19
+Produtor rural,Sul,71
+Aplicador especialista,Sul,15
+Funcionario da fazenda,Sul,38
+Cooperativa,Sul,4
+Consultor,Sul,0
+Outros,Sul,0
+Agronomo,Sudeste,40
+Tecnico agricola,Sudeste,20
+Produtor rural,Sudeste,36
+Aplicador especialista,Sudeste,24
+Funcionario da fazenda,Sudeste,56
+Cooperativa,Sudeste,4
+Consultor,Sudeste,0
+Outros,Sudeste,4
+Agronomo,Centro,30
+Tecnico agricola,Centro,20
+Produtor rural,Centro,32
+Aplicador especialista,Centro,32
+Funcionario da fazenda,Centro,68
+Cooperativa,Centro,0
+Consultor,Centro,2
+Outros,Centro,0
+Agronomo,Nordeste,47
+Tecnico agricola,Nordeste,24
+Produtor rural,Nordeste,41
+Aplicador especialista,Nordeste,18
+Funcionario da fazenda,Nordeste,29
+Cooperativa,Nordeste,0
+Consultor,Nordeste,0
+Outros,Nordeste,0
+Agronomo,Norte,67
+Tecnico agricola,Norte,22
+Produtor rural,Norte,56
+Aplicador especialista,Norte,44
+Funcionario da fazenda,Norte,33
+Cooperativa,Norte,0
+Consultor,Norte,0
+Outros,Norte,0
+Agronomo,Brasil,30
+Tecnico agricola,Brasil,17
+Produtor rural,Brasil,50
+Aplicador especialista,Brasil,21
+Funcionario da fazenda,Brasil,50
+Cooperativa,Brasil,3
+Consultor,Brasil,0
+Outros,Brasil,1

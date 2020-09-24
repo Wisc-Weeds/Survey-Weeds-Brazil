@@ -1,0 +1,440 @@
+---
+title: "English"
+author: "Maxwel Coura Oliveira"
+date: "1/31/2019"
+output: html_document
+---
+
+```{r}
+install.packages("tidyverse",dependencies = TRUE)
+```
+
+```{r include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(ggmap)
+library(maps)
+library(grid)
+library(mapdata)
+library(maptools)
+library(stringr)
+library(dplyr)
+library(ggsn)
+library(ggthemes)
+library(khroma)
+library(viridis)
+library(ggsci)
+```
+
+
+
+```{r include=FALSE}
+Regiao=read_csv("regiao.csv")
+
+
+Regiao$Regiao <-factor(Regiao$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("North", "Northeast", "Midwest", "Southeast", "South"))
+```
+
+```{r Regiao Figura}
+ggplot(Regiao, aes(x=Regiao, y=Perc, fill=Regiao)) + geom_bar(stat="identity", width = 0.7, color="black", sort=TRUE) + coord_flip() + #theme_economist_white() +
+  theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette="Set3") +
+   theme(axis.text.y =element_text(size=18, color="black"), axis.text.x =element_text(size=15, color="black"), plot.title = element_text(size=18, hjust = 0.5, color="red"),   plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondents", x="", title = "Respondents", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("Region.png", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+```{r include=FALSE}
+Ocupacao=read_csv("ocupacao.csv")
+
+
+Ocupacao$Ocupacao <-factor(Ocupacao$Ocupacao, levels=c("Agronomo", "Consultor", "Extensionista agricola", "Funcionario da propriedade rural", "Pesquisador publico", "Produtor rural", "Comercial (Gerencia/ATC/RTV/MKT)", "Pesquisador em empresa", "Professor", "Estudante", "Tecnico agricola"), labels=c("Agronomist", "Consultant", "Extension", "Farm hand",  "Gov researcher", "Grower", "Industry sales rep", "Industry research rep",  "Professor", "Student", "Technician"))
+
+
+Ocupacao$Regiao <-factor(Ocupacao$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northeast", "Midwest", "Southeast", "South", "Brazil"))
+```
+
+```{r Ocupacao Figura}
+ggplot(Ocupacao, aes(x=Ocupacao, y=Perc, fill=Ocupacao)) + geom_bar(stat="identity", width = 0.7, color="black", sort=TRUE) + facet_wrap(~Regiao) + coord_flip() + #theme_economist_white() +
+  theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette="Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0.0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondents", x="", title = "Respondents role", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("Ocupation.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+```{r Names Culturas, include=FALSE}
+Culturas=read_csv("Culturas.csv") %>% 
+  filter(Culturas != "Pastagem")
+
+Culturas$Culturas <-factor(Culturas$Culturas, levels=c("Citrus", "Cafe", "Milho", "Algodao", "Feijao", "Eucalipto", "Arroz",  "Sorgo",  "Soja", "Cana-de-acuca", "HF", "Trigo", "Culturas de inverno (aveia, cevada, triticale)"), labels=c("Citrus", "Coffee",  "Corn", "Cotton", "Common bean", "Eucalyptus", "Rice", "Sorghum", "Soybean", "Sugarcane", "Vegetables", "Wheat", "Small grains"))
+
+Culturas$Regiao <-factor(Culturas$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brazil (n=272)", "North (n=11)", "Northest (n=22)", "Midwest (n=62)", "Southeast (n=99)", "South (n=119)"))
+```
+
+
+```{r Culturas Figura}
+Culturas %>% 
+  mutate(Culturas = factor(Culturas, levels = c("Eucalyptus", "Citrus", "Coffee", "Vegetables", "Cotton", "Sorghum", "Sugarcane", "Rice", "Small grains", "Wheat", "Common bean", "Corn", "Soybean"))) %>% 
+
+ggplot(aes(x=Culturas, y=Perc, fill=Culturas)) + geom_bar(stat="identity", width = 0.7, color="black", sort=TRUE) + facet_wrap(~Regiao) + coord_flip() + 
+  theme_bw() +
+ # geom_text(aes(label = str_c(round(Perc), "%")),
+ #           position = position_stack(vjust = 1.1)) +
+  scale_fill_manual(values=c("#80ff00", "#ffe6e6", "#D4C1EC", "#FB6376", "#DECBB7", "#21468B", "#ED7D3A", "#FFFFFF", "#74ACDFFF", "#fed100", "#000000", "#009b3a", "#D91023")) +
+#  scale_color_material("teal") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0.4, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=13, face="bold"), legend.position="none", panel.grid = element_blank()) + 
+  labs(y="% respondents", x="", title = "", caption = "") + 
+  ggsave("Figure 2.pdf", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+
+```{r Safras, include=FALSE}
+Safras=read_csv("Safras.csv")
+
+Safras$Safras <-factor(Safras$Safras, levels=c("1", "2", "3"), labels=c("1", "2", "3"))
+
+Safras$Regiao <-factor(Safras$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+```
+
+
+```{r Safras Figura}
+ggplot(Safras, aes(x="", y=Perc, fill=Safras)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  scale_fill_manual(values = c("red", "blue", "darkgreen")) + #coord_polar(theta = "y", start = pi / 3) + 
+  theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text.y =element_text(size=14, color="black"), axis.text.x =element_text(size=14, color="black"), plot.subtitle = element_text(hjust = 0.5),  axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="", palette="Greens") +  
+  labs(y="% respondents", x="", title = "Seasons in a year", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("Season.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+
+```{r Irrigado}
+Irrigado=read_csv("Irrigado.csv")
+
+Irrigado$Irrigado <-factor(Irrigado$Irrigado, levels=c("Sim", "Parcialmente", "Nao"), labels=c("Yes", "Partially", "No"))
+
+Irrigado$Regiao <-factor(Irrigado$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+```
+
+```{r Irrigado Figura}
+ggplot(Irrigado, aes(x="", y=Perc, fill=Irrigado)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  scale_fill_manual(values = c("red", "blue", "darkgreen")) + #coord_polar(theta = "y", start = pi / 3) + 
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text.y =element_text(size=14, color="black"), axis.text.x =element_text(size=14, color="black"), plot.subtitle = element_text(hjust = 0.5),  axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="", palette="Greens") +  
+  labs(y="% respondentes", x="", title = "Irrigation", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("Irrigation.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+```{r Plantio direto, include=FALSE}
+PDireto=read_csv("PlantioDireto.csv")
+
+PDireto$Pdireto <-factor(PDireto$Pdireto, levels=c("Sim", "Parcialmente", "Nao"), labels=c("Yes", "Partially", "No"))
+
+PDireto$Regiao <-factor(PDireto$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+```
+
+```{r Plantio direto Figura}
+ggplot(PDireto, aes(x="", y=Perc, fill=Pdireto)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  scale_fill_manual(values = c("red", "blue", "darkgreen")) + #coord_polar(theta = "y", start = pi / 3) + 
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text.y =element_text(size=14, color="black"), axis.text.x =element_text(size=14, color="black"), plot.subtitle = element_text(hjust = 0.5),  axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="", palette="Greens") +  
+  labs(y="% respondentes", x="", title = "No-Till", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("NoTill.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+```{r Cobertura, include=FALSE}
+Cobertura=read_csv("Cobertura.csv")
+Cobertura$Cobertura <-factor(Cobertura$Cobertura, levels=c("Sim", "Nao"), labels=c("Yes",  "No"))
+Cobertura$Regiao <-factor(Cobertura$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+```
+
+```{r Cobertura Figura}
+ggplot(Cobertura, aes(x="", y=Perc, fill=Cobertura)) + geom_bar(stat="identity",  width=0.5, color="black") + facet_wrap(~Regiao) +
+  coord_polar(theta = "y", start = pi / 3) + 
+   theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+ # geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text =element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=15, face="bold", vjust=-3), axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="", palette="Greens") +  
+  labs(y="% respondentes", x="", title = "Cover Crops", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("Covercrops.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+```{r Lavoura}
+Lavoura=read_csv("Lavoura.csv")
+Lavoura$Lavoura <-factor(Lavoura$Lavoura, levels=c("Sim", "Nao"), labels=c("Yes",  "No"))
+Lavoura$Regiao <-factor(Lavoura$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+```
+
+
+```{r Lavoura Figura}
+ggplot(Lavoura, aes(x="", y=Perc, fill=Lavoura)) + geom_bar(stat="identity",  width=0.5, color="black") + facet_wrap(~Regiao) +
+  coord_polar(theta = "y", start = pi / 3) + 
+   theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+ # geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text =element_blank(), axis.title.x = element_blank(), axis.title.y = element_text(size=15, face="bold", vjust=-3), axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="", palette="Greens") +  
+  labs(y="% respondents", x="", title = "Crop Livestock Integration", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +  ggsave("Integration.tiff", units="in", width=12, height=6, dpi=200)
+```
+
+
+
+```{r Mimetizadores da auxina, include=FALSE}
+Mimeti=read_csv("Mimetizadores.csv")
+Mimeti$Resposta <-factor(Mimeti$Resposta, levels=c("Sim", "Parcialmente", "Nao"), labels=c("Yes", "Partially", "No"))
+Mimeti$Regiao <-factor(Mimeti$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+```
+
+```{r Mimeti Figura}
+ggplot(Mimeti, aes(x="", y=Perc, fill=Resposta)) + geom_col(width=0.5, size=0.1, color="black") + facet_wrap(~Regiao) +
+  scale_fill_manual(values = c("red", "blue", "darkgreen")) + #coord_polar(theta = "y", start = pi / 3) + 
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.3), size=4) +
+   theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+  #geom_label(aes(label=str_c(format(abs(Perc)), "%")), fill="white", position = position_stack(vjust = 0.5), size=4) +
+   theme(axis.text.y =element_text(size=14, color="black"), axis.text.x =element_text(size=14, color="black"), plot.subtitle = element_text(hjust = 0.5),  axis.title=element_text(size=15, face="bold"), strip.text.x = element_text(size=15, face="bold"), plot.title = element_text(size=18, hjust = 0.5, color="red"), legend.position = "bottom", legend.title = element_text(size=16, face="bold"), plot.caption = element_text(size=6), legend.text = element_text(size = 14, colour = "black")) + scale_fill_brewer(name="", palette="Greens") +  
+  labs(y="% respondents", x="", title = "Adoption of Xtend and Enlist", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) + ggsave("Xtend.tiff", units="in", width=9, height=6, dpi=800)
+```
+
+
+
+
+
+
+```{r RGly}
+RGly=read_csv("RGly.csv")
+RGly$Species <-factor(RGly$Species, levels=c("capim-pe-de-galinha", "buva", "azevem",  "capim-amargoso", "capim-branco", "Palmer"), labels=c("goosegrass", "horseweed", "Italian ryegrass",  "sourgrass", "tall windmill grass",  "Palmer amaranth"))
+RGly$Regiao <-factor(RGly$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+```
+
+```{r speciesfig Figura}
+ggplot(RGly, aes(x=Species, y=Perc, fill=Species)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + #scale_color_wsj() +
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0.0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondents", x="", title = "Glyphosate Resistant Weeds", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("GlyREng.tiff", units="in", width=9, height=6, dpi=800)
+```
+
+
+
+
+
+
+```{r include=FALSE}
+Data=read_csv("Plants.csv")
+
+Data$Regiao <-factor(Data$Regiao, levels=c("Brasil", "Norte", "Nordeste", "Centro", "Sudeste", "Sul"), labels=c("Brazil (n=256)", "North (n=11)", "Northest (n=22)", "Midwest (n=57)", "Southeast (n=93)", "South (n=113)"))
+
+Data$Species <-factor(Data$Species, levels=c("trapoeraba", "capim-pe-de-galinha", "capim colchao", "buva", "azevem", "capim massambara", "leiteiro",  "corda-de-viola", "Palmer", "caruru", "picao", "capim-amargoso", "capim-branco", "poaia-branca",    "tiririca", "arroz vermelho"),labels=c("dayflower", "goosegrass", "hairy crabgrass", "horseweed", "Italian ryegrass", "Johnsongrass", "Mexican fireplant", "morningglory", "Palmer amaranth",  "pigweed spp.", "Spanish needle", "sourgrass", "tall windmill grass", "tropical Mexican clover", "yellow nutsedge", "barnyardgrass"))
+```
+
+
+
+```{r}
+Data %>% 
+  mutate(label = ifelse(Regiao == "Brazil", "n=256", 
+         ifelse(Regiao == "Midwest", "n=57", 
+         ifelse(Regiao == "Northest", "n=22", 
+         ifelse(Regiao == "North", "n=11", 
+         ifelse(Regiao == "Southeast", "n=93",
+         ifelse(Regiao == "South", "n=113", NA))))))) %>% 
+  mutate(Species = factor(Species, levels = c("Palmer amaranth", "tall windmill grass", "Johnsongrass", "pigweed spp.", "Italian ryegrass", "tropical Mexican clover", "hairy crabgrass", "barnyardgrass", "Mexican fireplant", "Spanish needle", "yellow nutsedge", "goosegrass", "dayflower", "morningglory",  "sourgrass", "horseweed"))) %>% 
+ggplot() + aes(x=Species, y=Perc, fill=Species, label=label) + geom_bar(stat="identity", width = 0.7, color="black", sort=TRUE) + facet_wrap(~Regiao) + coord_flip() + #theme_economist_white() +
+  theme_bw() +
+    #annotate("text", x = 1, y = 95, label = c("n=256", "n=11", "n=22", "n=57", "n=93", "n=113"), size=3) +
+  #geom_text() +
+  scale_fill_manual(values=c("khaki1", "grey",  "red1", "purple","lightblue", "blue",  "turquoise1", "lightgreen", "palegoldenrod", "darkgreen", "pink",  "orange", "tomato4", "gold", "snow", "grey15")) +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0.0, color="red"),  axis.title = element_text(size=15, face="bold"), plot.caption = element_text(size=6), strip.text.x = element_text(size=13, face="bold"), legend.position="none", panel.grid = element_blank()) + 
+  labs(y="% respondents", x="", title = "", caption = "") + ylim(0,100) +
+  ggsave("Figure 4.pdf", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+```{r include=FALSE}
+Resistencia=read_csv("Resistencia.csv")
+
+Resistencia$Regiao <-factor(Resistencia$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+
+Resistencia$Herbicida <-factor(Resistencia$Herbicida, levels=c("Inibidores da ACCase", "Inibidores da ALS", "Inibidores da sintese de carotenoides", "Inibidores da PPO", "Inibidores de fotossistema I", "Inibidores de fotossistema II",   "Mimetizadores da auxina", "Inibidores da divisao celular ou VLCFA"), labels=c("ACCase (# 1)", "ALS (# 2)", "HPPD (# 27)", "PPO (# 14)", "PS I (# 22)", "PS II (# 5, 6 & 7)", "TIR1 (# 4)", "VLCFA (# 15)"))
+```
+
+
+
+```{r Resistfig Figura}
+ggplot(Resistencia, aes(x=Herbicida, y=Perc, fill=Herbicida)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=15, hjust = 0.0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondents", x="", title = "Weed Resistance (except EPSPS)", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("Resistence.tiff", units="in", width=9, height=6, dpi=800)
+```
+
+
+
+
+```{r include=FALSE}
+Aplicador=read_csv("Aplicador.csv")
+
+Aplicador$Regiao <-factor(Aplicador$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+
+Aplicador$Ocupacao <-factor(Aplicador$Ocupacao, levels=c("Agronomo", "Aplicador especialista", "Consultor", "Cooperativa", "Funcionario da fazenda",  "Produtor rural", "Tecnico agricola", "Outros"), labels=c("Agronomist", "Aplicator specialist", "Consultant", "Coop", "Farm hand",  "Grower", "Technician", "Other"))
+```
+
+
+
+```{r aplicadorfig Figura}
+ggplot(Aplicador, aes(x=Ocupacao, y=Perc, fill=Ocupacao)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0.0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondents", x="", title = "Herbicide Application", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("Aplicator.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+```{r include=FALSE}
+Satisfacao=read_csv("Satisfacao.csv")
+
+Satisfacao$Regiao <-factor(Satisfacao$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("Norte", "Nordeste", "Centro-Oeste", "Sudeste", "Sul", "Brasil"))
+
+Satisfacao$Species <-factor(Satisfacao$Species , levels=c("Daninha", "Insetos", "Doencas"), labels=c("Planta daninha", "Insetos", "Doenças"))
+
+Satisfacao$Nivel <-factor(Satisfacao$Nivel, levels=c("Baixo", "Satisfatorio", "Excelente"), labels=c("Baixo", "Satisfatório", "Excelente"))
+```
+
+
+
+```{r satisfacaofig Figura}
+ggplot(Satisfacao, aes(x=Nivel, y=Perc, fill=Nivel)) + geom_bar(stat="identity", width = 0.5, color="black") + facet_wrap(Species~Regiao, ncol=6) + coord_flip() + 
+  scale_fill_manual(values=c("red", "blue", "red", "red", "red", "blue")) +
+   theme(axis.text.y =element_text(size=13, color="black"), axis.text.x =element_text(size=12, color="black"), plot.subtitle = element_text(hjust = 0.5),  axis.title=element_text(size=15, face="bold"), plot.title = element_text(size=15, face="bold", hjust = 0.5), strip.text.x = element_text(size=12, face="bold"),
+        panel.background = element_rect(fill="white", color = "black"), legend.position = "none",
+        panel.grid.major = element_line(color = "white")) + scale_fill_brewer(palette="Paired") +
+  labs(y="% respondentes", x="", subtitle = "", caption = "Fonte: Questionário, Manejo de Plantas Daninhas no Brasil - Universidade de Wisconsin-Madison/Universidade Federal de Santa Maria, 2018") + ylim(0,100) +
+  ggsave("Satisfacao.tiff", units="in", width=13, height=7, dpi=800)
+```
+
+
+
+
+
+
+
+```{r include=FALSE}
+Info=read_csv("Informacao.csv")
+
+Info$Regiao <-factor(Info$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+
+Info$Local <-factor(Info$Local, levels=c("Embrapa", "Empresa de consultoria",  "Empresa de agroquimicos", "Entidades estaduais de pesquisa e extensao", "Universidade"), labels=c("Embrapa", "Consultant", "Industry",  "State Institute", "University"))
+```
+
+
+
+```{r Infofig Figura}
+ggplot(Info, aes(x=Local, y=Perc, fill=Local)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0.0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondents", x="", title = "Main Source of Information", caption = "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("InfoE.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+```{r include=FALSE}
+Problema=read_csv("Problema.csv")
+
+Problema$Regiao <-factor(Problema$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+
+Problema$Problema <-factor(Problema$Problema, levels=c("Custos", "Poucas opcoes de herbicidas", "Herbicidas seletivos", "Mao-de-obra", "Legislacao",  "Clima", "Resistencia"), labels=c("Costs", "Herbicide options", "Herbicide selectivity",  "Labor", "Legislation", "Weather",  "Weed Resistance"))
+```
+
+
+
+```{r Problemafig Figura}
+ggplot(Problema, aes(x=Problema, y=Perc, fill=Problema)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=18, hjust = 0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondents", x="", title = "Main limitations", caption =  "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +
+  ggsave("Problem.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+```{r include=FALSE}
+Metodos=read_csv("Metodos.csv")
+
+Metodos$Regiao <-factor(Metodos$Regiao, levels=c("Norte", "Nordeste", "Centro", "Sudeste", "Sul", "Brasil"), labels=c("North", "Northest", "Midwest", "Southeast", "South", "Brazil"))
+
+Metodos$Tipo <-factor(Metodos$Tipo, levels=c("Biologico", "Cultural", "Mecanico", "Fisico", "Nenhum"), labels=c("Biological", "Cultural", "Mechanic", "Physical", "None"))
+```
+
+
+
+```{r metodosfig Figura}
+ggplot(Metodos, aes(x=Tipo, y=Perc, fill=Tipo)) + geom_bar(stat="identity", width = 0.7, color="black") + facet_wrap(~Regiao) + coord_flip() + theme_wsj(base_size = 12, color = "grey", base_family = "sans",
+  title_family = "mono") + 
+  scale_fill_brewer(palette = "Set3") +
+   theme(axis.text.y =element_text(size=10, color="black"), axis.text.x =element_text(size=10, color="black"), plot.title = element_text(size=15, hjust = 0, color="red"),  axis.title=element_text(size=15, face="bold"), plot.caption = element_text(size=6),
+         strip.text.x = element_text(size=15, face="bold"), legend.position="none") + 
+  labs(y="% respondents", x="", title = "Alternative Weed Management", caption =  "Source: Cropping-System Weed Management Survey - UW-Madison/UFSM, 2018") + ylim(0,100) +   ggsave("Method.tiff", units="in", width=9, height=6, dpi=600)
+```
+
+
+
+
+
+
+

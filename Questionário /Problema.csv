@@ -1,0 +1,43 @@
+Problema,Regiao,Perc
+Clima,Sul ,0
+Clima,Sudeste,1
+Clima,Centro,0
+Clima,Nordeste,0
+Clima,Norte,0
+Clima,Brasil,1
+Custos,Sul ,47
+Custos,Sudeste,56
+Custos,Centro,47
+Custos,Nordeste,81
+Custos,Norte,63
+Custos,Brasil,53
+Herbicidas seletivos,Sul ,38
+Herbicidas seletivos,Sudeste,34
+Herbicidas seletivos,Centro,38
+Herbicidas seletivos,Nordeste,38
+Herbicidas seletivos,Norte,0
+Herbicidas seletivos,Brasil,38
+Legislacao,Sul ,31
+Legislacao,Sudeste,29
+Legislacao,Centro,31
+Legislacao,Nordeste,13
+Legislacao,Norte,25
+Legislacao,Brasil,30
+Mao-de-obra,Sul ,20
+Mao-de-obra,Sudeste,15
+Mao-de-obra,Centro,20
+Mao-de-obra,Nordeste,31
+Mao-de-obra,Norte,0
+Mao-de-obra,Brasil,18
+Poucas opcoes de herbicidas,Sul ,0
+Poucas opcoes de herbicidas,Sudeste,0
+Poucas opcoes de herbicidas,Centro,0
+Poucas opcoes de herbicidas,Nordeste,0
+Poucas opcoes de herbicidas,Norte,0
+Poucas opcoes de herbicidas,Brasil,1
+Resistencia,Sul ,78
+Resistencia,Sudeste,59
+Resistencia,Centro,78
+Resistencia,Nordeste,56
+Resistencia,Norte,75
+Resistencia,Brasil,69

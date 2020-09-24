@@ -1,0 +1,51 @@
+---
+title: "Cover letter"
+author: "Maxwel Coura Oliveira"
+date: ""
+output: pdf_document
+---
+
+
+
+
+```{r include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(knitr)
+```
+
+
+
+
+\hfill Maxwel Coura Oliveira, Ph.D.
+
+\hfill Assistant Professor
+
+\hfill Western Sao Paulo University
+
+August 18, 2020
+
+
+Dear Dr. Jason Norsworthy
+
+Please find enclosed the revised manuscript entitled "Assessment of Crop and Weed Management Strategies Prior to Introduction of Auxin-Tolerant Crops in Brazil" by Dr. Maxwel Coura Oliveira, Ms. Anelise Lencina da Silva, Dr. André da Rosa Ulguim and Dr. Rodrigo Werle. This manuscript is a contribution for the Research and Extension section of Weed Technology journal.
+
+This manuscript is a 2018 survey of Brazilian stakeholders' perceptions and challenges about cropping systems and weed management strategies. Brazil is a top producer of cereals, grains, fiber, fruits and ethanol. Brazil has become the top soybean producer worldwide. We provide an  overview about the current cropping systems and weed management practices adopted by Brazilian stakeholders. The main take home message is that novel agricultural technologies from chemical industry are usually devoloped to address United States weed problems, but in some cases have no/low value to address weed management challenges in Brazil. This is the case of new synthetic auxin resistant crops (Xtend and Enlist) introduced in the United States in 2017 as an excellent tool for controlling pigweed species (Palmer amaranth and waterhemp). The Xtend and Enlist technology allow postemergence application of dicamba and 2,4-D in soybean and cotton. These technologies are expected in Brazil in the next couple years; however, our survey showed the main weed problems in Brazil are grasses and dicamba and 2,4-D control only broadleaf weed species. Our manuscript also provides data on multiple cropping systems strategies, herbicide weed resistance, and herbicide use in Brazil.
+
+This manuscript was "accepted" for publication with minor reviews. We have addressed the minor concerns. There is a pdf file attached with the addressed revisions. We believe that this manuscript fits the Research and Extension section. This manuscript is considered for publication only at Weed Technology Journal. 
+
+**Note** The Cambridge system allows only submission of manuscript in a word format but I am not a microsoft word user; therefore, the manuscript is provided as supplemental material as pdf and TeX files.
+
+Best regards,
+
+
+
+\vspace{3cm}
+
+
+
+Maxwel Coura Oliveira
+
+
+
+
